@@ -116,20 +116,43 @@ def get_followers(Username):
         return "ni"
 
 
-def upload_profile_pic(Username):
+def upload_profile_pic(Username,file_data):
     cnx=connect()
     cursor=cnx.cursor()
+    
 
-    query = "INSERT INTO uporabniki (profile_pic) VALUES (%s) WHERE username = '%s'"
-        
+    query = "UPDATE uporabniki u SET profile_pic =%s WHERE u.Username = %s"
+            
     
 
     cursor.execute(query, (file_data,Username))
-    followers = cursor.fetchone()
-
+    cnx.commit()
+    
         
     cursor.close()
     cnx.close()
 
 
+def get_profile_pic(Username):
+
+    
+
+    
+    cnx=connect()
+    cursor=cnx.cursor()
+
+    query = "SELECT profile_pic FROM uporabniki u WHERE u.Username = %s"
+        
+    
+
+    cursor.execute(query, (Username,))
+    data = cursor.fetchone()
+
+        
+    cursor.close()
+    cnx.close()
+
+    return data[0]
+
+  
 

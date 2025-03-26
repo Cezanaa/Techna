@@ -2,9 +2,10 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic
+from encoding import encode_image
 
 
 app = Flask(__name__)
@@ -94,15 +95,42 @@ def home():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template("profile.html")
+    
+    if get_profile_pic(current_user.id) is None:
+        profile_pic="deafult"
+        return render_template("profile.html",profile_pic=profile_pic)
+
+    profile_pic = encode_image(get_profile_pic(current_user.id))
+    return render_template("profile.html",profile_pic=profile_pic)
+
 
 # Profile route
-@app.route("/edit-profile")
+@app.route("/edit-profile", methods=["POST", "GET"])
 @login_required
 def edit_profile():
     form = UploadProfilePic()
+
+    if request.method == "POST" and form.validate_on_submit():
+        profile_pic = form.ProfilePic.data
+        profile_pic_data = profile_pic.read()
+        
+        
+        upload_profile_pic(current_user.id,profile_pic_data)
+        
+        if get_profile_pic(current_user.id) is None:
+            profile_pic="deafult"
+            return redirect(url_for('edit_profile',profile_pic=profile_pic))
+
+        profile_pic = encode_image(get_profile_pic(current_user.id))
+        return redirect(url_for('edit_profile',profile_pic=profile_pic))
+
     
-    return render_template("edit_profile.html",form=form)
+    if get_profile_pic(current_user.id) is None:
+        profile_pic="deafult"
+        return render_template("edit_profile.html",profile_pic=profile_pic,form=form)
+
+    profile_pic = encode_image(get_profile_pic(current_user.id))
+    return render_template("edit_profile.html",profile_pic=profile_pic,form=form)
 
 
 

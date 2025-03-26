@@ -5,63 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - Music Streaming</title>
     <link rel="stylesheet" href="static/profile.css">
+    <link rel="stylesheet" href="static/home.css"> <!-- Include the home.css for sidebar and footer -->
 </head>
 <body>
-
-    <div class="profile-container">
-        <!-- Profile Header Section -->
-        <div class="profile-header">
-            <div class="profile-pic">
-                <img id="profile-pic" src="profile-pic.jpg" alt="Artist Profile Picture" />
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="static/images/logo.png" alt="Techna Logo">
+                <h1>Techna</h1>
             </div>
-            <div class="artist-info">
-                <h1 class="artist-name">{{current_user.id}}</h1>
-                
-                <p class="artist-bio">Short bio about the artist. This can include information about their music style, achievements, and more.</p>
-                <p class="followers-count">Followers: <span id="followers-count">{{current_user.followers}}</span></p> <!-- Display followers count here -->
-                <!-- Edit Profile link -->
-                <a href="{{ url_for('edit_profile') }}" class="edit-profile-link">Edit Profile</a>
-            </div>
-        </div>
-
-        <!-- Albums Section -->
-        <div class="albums-section">
-            <h2>Albums</h2>
-            <div class="album-list">
-                <div class="album">
-                    <img src="album1.jpg" alt="Album 1" />
-                    <h3>Album Name 1</h3>
-                    <p>Release Year: 2021</p>
-                </div>
-                <div class="album">
-                    <img src="album2.jpg" alt="Album 2" />
-                    <h3>Album Name 2</h3>
-                    <p>Release Year: 2019</p>
-                </div>
-                <!-- More albums can be added here -->
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Your Library</a></li>
+            </ul>
+            <div class="playlists">
+                <h3>Playlists</h3>
+                <ul>
+                    <li><a href="#">Hardcore Beats</a></li>
+                    <li><a href="#">Dark Techno</a></li>
+                    <li><a href="#">Underground Vibes</a></li>
+                </ul>
             </div>
         </div>
 
-       
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="profile-container">
+                <!-- Profile Header Section -->
+                <div class="profile-header">
+                    <div class="profile-pic">
+                        
+                        
 
-        <!-- Singles Section -->
-        <div class="singles-section">
-            <h2>Singles</h2>
-            <div class="single-list">
-                <div class="single">
-                    <img src="single1.jpg" alt="Single 1" />
-                    <h3>Single Title 1</h3>
-                    <p>Release Year: 2020</p>
+                        {% if profile_pic == "deafult" %}
+                            
+                            <img id="profile-pic" src="{{ url_for('static', filename='default_profile_pic.png') }}" alt="profile picture">
+                            
+                        {% else %}
+                            <img id="profile-pic" src="data:image/jpeg;base64,{{ profile_pic }}" alt="profile picture" />
+                        {% endif %}
+
+                        
+
+
+
+                    </div>
+                    
+
+                    <div class="artist-info">
+                        <h1 class="artist-name">{{current_user.id}}</h1>
+                        <p class="artist-bio">Short bio about the artist. This can include information about their music style, achievements, and more.</p>
+                        <p class="followers-count">Followers: <span id="followers-count">{{current_user.followers}}</span></p>
+                        <!-- Edit Profile link -->
+                        <a href="{{ url_for('edit_profile') }}" class="edit-profile-link">Edit Profile</a>
+                    </div>
                 </div>
-                <div class="single">
-                    <img src="single2.jpg" alt="Single 2" />
-                    <h3>Single Title 2</h3>
-                    <p>Release Year: 2022</p>
+
+                <!-- Albums Section -->
+                <div class="albums-section">
+                    <h2>Albums</h2>
+                    <div class="album-list">
+                        <div class="album">
+                            <img src="album1.jpg" alt="Album 1" />
+                            <h3>Album Name 1</h3>
+                            <p>Release Year: 2021</p>
+                        </div>
+                        <div class="album">
+                            <img src="album2.jpg" alt="Album 2" />
+                            <h3>Album Name 2</h3>
+                            <p>Release Year: 2019</p>
+                        </div>
+                    </div>
                 </div>
-                <!-- More singles can be added here -->
+
+                <!-- Singles Section -->
+                <div class="singles-section">
+                    <h2>Singles</h2>
+                    <div class="single-list">
+                        <div class="single">
+                            <img src="single1.jpg" alt="Single 1" />
+                            <h3>Single Title 1</h3>
+                            <p>Release Year: 2020</p>
+                        </div>
+                        <div class="single">
+                            <img src="single2.jpg" alt="Single 2" />
+                            <h3>Single Title 2</h3>
+                            <p>Release Year: 2022</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <div class="footer">
+        <div class="now-playing">
+            <img src="static/images/album.jpg" alt="Album Art">
+            <div class="song-info">
+                <h4>Song Title</h4>
+                <p>Artist Name</p>
+            </div>
+        </div>
+        <div class="controls">
+            <button>⏮</button>
+            <button>⏯</button>
+            <button>⏭</button>
+        </div>
+        <div class="volume">
+            <label for="volume">Volume</label>
+            <input type="range" id="volume" min="0" max="100">
+        </div>
+    </div>
 </body>
 </html>

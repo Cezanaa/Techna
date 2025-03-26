@@ -1,43 +1,151 @@
-/* General page styling */
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
-    background-color: #f4f4f4;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
-/* Form container */
-form {
-    display: inline-block;
+/* Container */
+.container {
+    display: flex;
+    flex: 1;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Input fields */
-input[type="file"] {
-    margin: 10px 0;
+/* Edit Profile Container */
+.edit-profile-container {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e; /* Slightly lighter dark */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    width: 600px;
+    gap: 20px; /* Space between profile picture and form */
 }
 
-input[type="submit"] {
-    background: #28a745;
-    color: white;
+/* Profile Picture Section */
+.profile-pic-section {
+    flex: 1; /* Take up equal space */
+    text-align: center;
+}
+
+/* Profile Picture */
+.profile-pic {
+    width: 100px; /* Smaller size */
+    height: 100px; /* Smaller size */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image scales properly */
+    border: 2px solid #00ffff; /* Neon border */
+    display: block; /* Ensures the image is displayed as a block element */
+    margin: 0 auto; /* Centers the image horizontally */
+}
+
+/* Form Section */
+.edit-profile-form-section {
+    flex: 2; /* Take up more space for the form */
+}
+
+.edit-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    font-size: 1rem;
+    color: #b3b3b3; /* Light gray */
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b3b3b3; /* Light gray border */
+    border-radius: 4px;
+    background-color: #282828; /* Dark gray */
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #1db954; /* Spotify green */
+}
+
+/* Submit Button */
+.submit-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #1db954; /* Spotify green */
+    color: #ffffff;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
-    background: #218838;
+.submit-button:hover {
+    background-color: #1ed760; /* Lighter green on hover */
 }
 
-/* Display uploaded image */
-img {
-    margin-top: 20px;
-    max-width: 300px;
-    border-radius: 10px;
-    border: 3px solid #ddd;
+/* File Input Container */
+.file-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Ensure it fits within the parent container */
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* File Input */
+.file-input {
+    width: 100%; /* Make the input fit within the container */
+    max-width: 300px; /* Optional: Set a max width */
+    padding: 8px; /* Adjust padding for consistency */
+    font-size: 0.9rem;
+    border: 1px solid #b3b3b3; /* Light gray border */
+    border-radius: 4px;
+    background-color: #282828; /* Dark gray */
+    color: #ffffff;
+}
+
+.file-input:focus {
+    outline: none;
+    border-color: #1db954; /* Spotify green */
+}
+
+/* Change Button */
+.change-button {
+    padding: 8px 15px; /* Adjust padding for consistency */
+    font-size: 0.9rem; /* Match the font size of the Edit Profile button */
+    background-color: #444; /* Subtle dark gray */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.change-button:hover {
+    background-color: #555; /* Slightly lighter gray on hover */
+    color: #ddd; /* Softer white text on hover */
 }

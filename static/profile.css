@@ -1,0 +1,198 @@
+/* Reset some default browser styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Profile Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-info {
+    max-width: 800px;
+}
+
+.artist-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.artist-bio {
+    font-size: 1rem;
+    color: #777;
+}
+
+.followers-count {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Edit Profile Link */
+.edit-profile-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.edit-profile-link:hover {
+    background-color: #0056b3;
+}
+
+/* Albums Section */
+.albums-section,
+.songs-section,
+.singles-section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Albums Layout */
+.album-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.album {
+    width: 200px;
+    text-align: center;
+}
+
+.album img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.album h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.album p {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Songs List */
+.song-list {
+    list-style-type: none;
+}
+
+.song {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.song-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.song-duration {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Singles Layout */
+.single-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.single {
+    width: 200px;
+    text-align: center;
+}
+
+.single img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.single h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.single p {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-pic {
+        margin-bottom: 20px;
+    }
+
+    .album-list,
+    .single-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .album,
+    .single {
+        width: 100%;
+        max-width: 300px;
+    }
+}

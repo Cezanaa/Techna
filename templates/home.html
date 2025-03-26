@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techna - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <img src="static/images/logo.png" alt="Techna Logo">
+                <h1>Techna</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Your Library</a></li>
+            </ul>
+            <div class="playlists">
+                <h3>Playlists</h3>
+                <ul>
+                    <li><a href="#">Hardcore Beats</a></li>
+                    <li><a href="#">Dark Techno</a></li>
+                    <li><a href="#">Underground Vibes</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <input type="text" placeholder="Search for songs, artists, or albums..." class="search-bar">
+            </header>
+            <div class="content">
+                <h2>Featured Playlists</h2>
+                <div class="playlist-grid">
+                    <div class="playlist-card">
+                        <img src="static/images/playlist1.jpg" alt="Playlist 1">
+                        <h3>Hardcore Beats</h3>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="static/images/playlist2.jpg" alt="Playlist 2">
+                        <h3>Dark Techno</h3>
+                    </div>
+                    <div class="playlist-card">
+                        <img src="static/images/playlist3.jpg" alt="Playlist 3">
+                        <h3>Underground Vibes</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="now-playing">
+                <img src="static/images/album.jpg" alt="Album Art">
+                <div class="song-info">
+                    <h4>Song Title</h4>
+                    <p>Artist Name</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button>⏮</button>
+                <button>⏯</button>
+                <button>⏭</button>
+            </div>
+            <div class="volume">
+                <label for="volume">Volume</label>
+                <input type="range" id="volume" min="0" max="100">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

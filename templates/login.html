@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form action="#" method="post">
+            {{ form.hidden_tag() }}
+
+            <!-- Username field -->
+            <div class="form-group">
+                <label for="username">{{ form.Username.label }}</label>
+                {{ form.Username(id="username", class="form-control", placeholder="Enter your username") }}
+                <span class="error">{{ Username_error }}</span>
+            </div>
+
+            <!-- Password field -->
+            <div class="form-group">
+                <label for="password">{{ form.Password.label }}</label>
+                {{ form.Password(id="password", class="form-control", placeholder="Enter your password") }}
+                <span class="error">{{ Password_error }}</span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-container">
+                {{ form.Submit(id="submit-btn", class="login-button", label="Log In") }}
+                <a href="{{ url_for('sign_up') }}">
+                    <button type="button" class="signup-button">Sign Up</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

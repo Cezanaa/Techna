@@ -18,7 +18,8 @@ CREATE TABLE IF NOT EXISTS `user_data` (
 CREATE TABLE IF NOT EXISTS `uporabniki` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Username` VARCHAR(30) NOT NULL,
-  `Password` VARCHAR(255) NOT NULL, 
+  `Password` LONGBLOB NOT NULL,
+  `Salt` LONGBLOB NOT NULL,
   `user_data_ID` INT NOT NULL,
   `profile_pic` LONGBLOB DEFAULT NULL,
   `followers` INT DEFAULT 0,

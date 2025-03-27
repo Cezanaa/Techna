@@ -1,10 +1,10 @@
 # py -m pip install -r ./requirements.txt --user
 
 
-from flask import Flask, render_template, redirect, request, url_for
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt
+from flask import Flask, render_template, redirect, request, url_for,jsonify
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt,get_bio,update_bio,upload_song,get_song_data
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from forms import RegistrationForm, loginForm,UploadProfilePic
+from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle
 from encoding import encode_image,salt_password
 
 
@@ -90,6 +90,7 @@ def sign_up():
 @app.route("/home")
 @login_required
 def home():
+    print(jsonify(get_song_data("test")))
     return render_template("home.html")
 
 # Profile route
@@ -97,31 +98,50 @@ def home():
 @login_required
 def profile():
     
-    if get_profile_pic(current_user.id) is None:
-        profile_pic="deafult"
-        return render_template("profile.html",profile_pic=profile_pic)
+    
+    singles_len = get_song_data(current_user.id)[1]
+    return render_template("profile.html",singles_len=singles_len)
 
-    profile_pic = encode_image(get_profile_pic(current_user.id))
-    return render_template("profile.html",profile_pic=profile_pic)
+@app.route("/singles-display")
+@login_required
+def singles_display():
 
+    return jsonify(get_song_data(current_user.id))
 
 # Profile route
 @app.route("/edit-profile", methods=["POST", "GET"])
 @login_required
 def edit_profile():
-    form = UploadProfilePic()
+    update_profile_pic_form = UploadProfilePic()
+    update_bio_form = UpdateBio()
+    uploas_single_form = UploadSingle()
 
-    if request.method == "POST" and form.validate_on_submit():
-        profile_pic = form.ProfilePic.data
-        profile_pic_data = profile_pic.read()
+    if request.method == "POST":
+
+        profile_pic = update_profile_pic_form.ProfilePic.data
+        bio = update_bio_form.Bio.data
+        song_title = uploas_single_form.Title.data
+        song_file = uploas_single_form.Audio.data
+        song_cover_art=uploas_single_form.CoverArt.data
+
+        if profile_pic:
         
-        
-        upload_profile_pic(current_user.id,profile_pic_data)
+            profile_pic_data = profile_pic.read()
+            upload_profile_pic(current_user.id,profile_pic_data)
+        if bio:
+            update_bio(current_user.id,bio)
+
+        if song_title:
+            song_file = song_file.read()
+            song_cover_art = song_cover_art.read()
+            upload_song(current_user.id,song_title,song_file,song_cover_art)
+
+            
         
         return redirect(url_for('edit_profile'))
 
     
-    return render_template("edit_profile.html",form=form)
+    return render_template("edit_profile.html",update_profile_pic_form=update_profile_pic_form,update_bio_form=update_bio_form,uploas_single_form=uploas_single_form)
 
 
 @app.route("/display-profile-pic", methods=["POST", "GET"])
@@ -129,11 +149,20 @@ def edit_profile():
 def display_profile_pic():
     
     if not get_profile_pic(current_user.id):
-        return "deafult"
+        return "static/default_profile_pic.png"
 
     return encode_image(get_profile_pic(current_user.id))
 
+
+@app.route("/display-bio", methods=["POST", "GET"])
+@login_required
+def display_bio():
     
+    if not get_bio(current_user.id):
+        return "edit your bio in the edit profile section"
+    
+
+    return get_bio(current_user.id)
 
 
 # Run the app

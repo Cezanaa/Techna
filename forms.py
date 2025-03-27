@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField,FileField
+from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField,FileField,TextAreaField
 from wtforms.validators import data_required,Length,Email,equal_to
 from flask_wtf.file import FileAllowed
 
@@ -25,7 +25,18 @@ class loginForm(FlaskForm):
 
 class UploadProfilePic(FlaskForm):
 
-    ProfilePic = FileField("Change profile pitcure",validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-    Submit = SubmitField("Change", render_kw={"onclick": "getImage()"})
+    ProfilePic = FileField("Change profile pitcure",validators=[FileAllowed(['jpg', 'png', 'jpeg'],'Image files only!'),data_required()])
+    Submit = SubmitField("Change")
+
+class UploadSingle(FlaskForm):
+
+    CoverArt = FileField("Add cover",validators=[FileAllowed(['jpg', 'png', 'jpeg']),data_required()])
+    Title = StringField('Title',validators=[data_required(),Length(max=30)])
+    Audio = FileField("Song file",validators=[data_required(),FileAllowed(['mp3', 'wav', 'ogg'], 'Audio files only!')])
+    Submit = SubmitField("Upload")
 
 
+
+class UpdateBio(FlaskForm):
+    Bio = TextAreaField("Write a short bio",validators=[data_required(),Length(min=0,max=200)])
+    Submit = SubmitField("Change")

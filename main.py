@@ -118,23 +118,22 @@ def edit_profile():
         
         upload_profile_pic(current_user.id,profile_pic_data)
         
-        if get_profile_pic(current_user.id) is None:
-            profile_pic="deafult"
-            return redirect(url_for('edit_profile',profile_pic=profile_pic))
-
-        profile_pic = encode_image(get_profile_pic(current_user.id))
-        return redirect(url_for('edit_profile',profile_pic=profile_pic))
+        return redirect(url_for('edit_profile'))
 
     
-    if get_profile_pic(current_user.id) is None:
-        profile_pic="deafult"
-        return render_template("edit_profile.html",profile_pic=profile_pic,form=form)
-        
-
-    profile_pic = encode_image(get_profile_pic(current_user.id))
-    return render_template("edit_profile.html",profile_pic=profile_pic,form=form)
+    return render_template("edit_profile.html",form=form)
 
 
+@app.route("/display-profile-pic", methods=["POST", "GET"])
+@login_required
+def display_profile_pic():
+    
+    if not get_profile_pic(current_user.id):
+        return "deafult"
+
+    return encode_image(get_profile_pic(current_user.id))
+
+    
 
 
 # Run the app

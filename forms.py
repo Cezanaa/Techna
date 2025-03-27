@@ -26,5 +26,6 @@ class loginForm(FlaskForm):
 class UploadProfilePic(FlaskForm):
 
     ProfilePic = FileField("Change profile pitcure",validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-    Submit = SubmitField("Change")
+    Submit = SubmitField("Change", render_kw={"onclick": "getImage()"})
+
 

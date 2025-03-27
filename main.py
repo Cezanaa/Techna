@@ -2,10 +2,10 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic
-from encoding import encode_image
+from encoding import encode_image,salt_password
 
 
 app = Flask(__name__)
@@ -41,7 +41,8 @@ def login():
         Password = form.Password.data
 
         if find_user(Username) != "ni":
-            if Password == find_user_password(find_user(Username)):
+            
+            if salt_password(Password,get_salt(Username)) == find_user_password(find_user(Username)):
                 Gmail = get_gmail(Username)
                 Followers = get_followers(Username)
                 user = User(Username, Gmail,Followers)
@@ -128,6 +129,7 @@ def edit_profile():
     if get_profile_pic(current_user.id) is None:
         profile_pic="deafult"
         return render_template("edit_profile.html",profile_pic=profile_pic,form=form)
+        
 
     profile_pic = encode_image(get_profile_pic(current_user.id))
     return render_template("edit_profile.html",profile_pic=profile_pic,form=form)

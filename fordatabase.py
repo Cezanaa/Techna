@@ -1,5 +1,7 @@
 import mysql.connector as sql
 
+from encoding import gen_salt,salt_password
+
 
 def connect():
 
@@ -16,7 +18,7 @@ def add_account(Username,Password,Name,Age,Gender,Gmail):
     cursor=cnx.cursor()
 
     query_user_data = "INSERT INTO user_data (Name,Age,Gender,Email) VALUES (%s,%s,%s,%s)"
-    query_uporabniki = "INSERT INTO uporabniki (Username,Password,user_data_ID) VALUES (%s,%s,%s)"
+    query_uporabniki = "INSERT INTO uporabniki (Username,Password,Salt,user_data_ID) VALUES (%s,%s,%s,%s)"
     
     values_user_data = (Name, Age, Gender, Gmail)
     
@@ -24,8 +26,9 @@ def add_account(Username,Password,Name,Age,Gender,Gmail):
     id = cursor.lastrowid
 
 
-    
-    values_uporabniki = (Username,Password,id)
+    salt=gen_salt()
+    Password=salt_password(Password,salt)
+    values_uporabniki = (Username,Password,salt,id)
     cursor.execute(query_uporabniki,values_uporabniki)
     
     cnx.commit()
@@ -154,5 +157,23 @@ def get_profile_pic(Username):
 
     return data[0]
 
+
+def get_salt(Username):
+    cnx=connect()
+    cursor=cnx.cursor()
+    
+
+    query = "SELECT Salt from uporabniki u WHERE Username = %s"
+            
+    
+
+    cursor.execute(query, (Username,))
+    salt=cursor.fetchone()
+    
+    
+    
+    cursor.close()
+    cnx.close()
+    return salt[0]
   
 

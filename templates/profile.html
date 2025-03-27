@@ -6,6 +6,7 @@
     <title>User Profile - Music Streaming</title>
     <link rel="stylesheet" href="static/profile.css">
     <link rel="stylesheet" href="static/home.css"> <!-- Include the home.css for sidebar and footer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <div class="container">
@@ -38,20 +39,7 @@
                 <div class="profile-header">
                     <div class="profile-pic">
                         
-                        
-
-                        {% if profile_pic == "deafult" %}
-                            
-                            <img id="profile-pic" src="{{ url_for('static', filename='default_profile_pic.png') }}" alt="profile picture">
-                            
-                        {% else %}
-                            <img id="profile-pic" src="data:image/jpeg;base64,{{ profile_pic }}" alt="profile picture" />
-                        {% endif %}
-
-                        
-
-
-
+                        <img id="profile-pic" src=""  />
                     </div>
                     
 
@@ -121,4 +109,29 @@
         </div>
     </div>
 </body>
+<script>
+    $( document ).ready(function() {
+       
+       $.ajax({
+           url: "/display-profile-pic",
+           success: function( result ) {
+               if(result=="static/default_profile_pic.png"){
+                   document.getElementById("profile-pic").src = result
+
+               }
+
+               else{
+
+                   var base64Image = "data:image/jpeg;base64," + result;
+                   document.getElementById("profile-pic").src = base64Image;
+
+               }
+           
+   }
+   });
+
+   });
+
+
+</script>
 </html>

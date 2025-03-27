@@ -37,13 +37,9 @@
             <div class="edit-profile-container">
                 <!-- Profile Picture Section -->
                 <div class="profile-pic-section">
-                    {% if profile_pic == "deafult" %}
-                            
-                        <img class="profile-pic" src="{{ url_for('static', filename='default_profile_pic.png') }}" alt="profile picture">
-                            
-                    {% else %}
-                        <img class="profile-pic" src="data:image/jpeg;base64,{{ profile_pic }}" alt="profile picture" />
-                    {% endif %}
+                    
+                    <img id="profile-pic" class="profile-pic" src="" />
+                    
                 </div>
                 
             
@@ -90,24 +86,29 @@
 
 <script>
      $( document ).ready(function() {
-        console.log("aa")
+        
         $.ajax({
             url: "/display-profile-pic",
             success: function( result ) {
-                console.log(result);
-                var base64Image = "data:image/jpeg;base64," + result;
+                if(result=="static/default_profile_pic.png"){
+                    document.getElementById("profile-pic").src = result
 
-// Display the image in the <img> tag
-            $('#profile-pic').attr('src', base64Image).show();
+                }
+
+                else{
+
+                    var base64Image = "data:image/jpeg;base64," + result;
+                    document.getElementById("profile-pic").src = base64Image;
+
+                }
+
+            
+                
     }
     });
 
     });
  
-
-
-    
-
 
 </script>
 

@@ -42,22 +42,75 @@
                     
                 </div>
                 
-            
-
                 <!-- Edit Profile Form Section -->
-                <div class="edit-profile-form-section">
-                    <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
-                        {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            <label for="ProfilePic">{{ form.ProfilePic.label }}</label>
-                            <div class="file-input-container">
-                                {{ form.ProfilePic(class="form-control file-input") }}
+                <div class="edit-profile-container">
+                    <!-- Left Box: Update Bio and Change Profile Picture -->
+                    <div class="left-box">
+                        <div class="edit-profile-form-section">
+                            <!-- Update Bio Form -->
+                            <div class="form-wrapper">
+                                <div class="form-container">
+                                    <h2>Update Bio</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="update-bio-form">
+                                        {{ update_bio_form.hidden_tag() }}
+                                        <div class="form-group">
+                                            <label for="Bio">{{ update_bio_form.Bio.label }}</label>
+                                            {{ update_bio_form.Bio(class="form-control bio-input", placeholder="Update your bio") }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ update_bio_form.Submit(class="submit-button update-button") }}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Change Profile Picture Form -->
+                            <div class="form-wrapper">
+                                <div class="form-container">
+                                    <h2>Change Profile Picture</h2>
+                                    <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
+                                        {{ update_profile_pic_form.hidden_tag() }}
+                                        <div class="form-group">
+                                            <label for="ProfilePic">{{ update_profile_pic_form.ProfilePic.label }}</label>
+                                            <div class="file-input-container">
+                                                {{ update_profile_pic_form.ProfilePic(class="form-control file-input", title="Choose a profile picture") }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            {{ update_profile_pic_form.Submit(class="submit-button change-button") }}
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            {{ form.Submit(class="submit-button change-button") }}
+                    </div>
+
+                    <!-- Right Box: Upload a Single -->
+                    <div class="right-box">
+                        <div class="form-wrapper">
+                            <div class="form-container">
+                                <h2>Upload a Single</h2>
+                                <form method="POST" enctype="multipart/form-data" class="upload-single-form">
+                                    {{ uploas_single_form.hidden_tag() }}
+                                    <div class="form-group">
+                                        <label for="Title">{{ uploas_single_form.Title.label }}</label>
+                                        {{ uploas_single_form.Title(class="form-control", placeholder="Enter the song title") }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Audio">{{ uploas_single_form.Audio.label }}</label>
+                                        {{ uploas_single_form.Audio(class="form-control file-input", title="Choose an audio file") }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="CoverArt">{{ uploas_single_form.CoverArt.label }}</label>
+                                        {{ uploas_single_form.CoverArt(class="form-control file-input", title="Choose cover art") }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ uploas_single_form.Submit(class="submit-button upload-button") }}
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

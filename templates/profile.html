@@ -45,7 +45,7 @@
 
                     <div class="artist-info">
                         <h1 class="artist-name">{{current_user.id}}</h1>
-                        <p class="artist-bio">Short bio about the artist. This can include information about their music style, achievements, and more.</p>
+                        <p  id="artist-bio" class="artist-bio">Short bio about the artist. This can include information about their music style, achievements, and more.</p>
                         <p class="followers-count">Followers: <span id="followers-count">{{current_user.followers}}</span></p>
                         <!-- Edit Profile link -->
                         <a href="{{ url_for('edit_profile') }}" class="edit-profile-link">Edit Profile</a>
@@ -73,16 +73,18 @@
                 <div class="singles-section">
                     <h2>Singles</h2>
                     <div class="single-list">
-                        <div class="single">
-                            <img src="single1.jpg" alt="Single 1" />
-                            <h3>Single Title 1</h3>
-                            <p>Release Year: 2020</p>
-                        </div>
-                        <div class="single">
-                            <img src="single2.jpg" alt="Single 2" />
-                            <h3>Single Title 2</h3>
-                            <p>Release Year: 2022</p>
-                        </div>
+
+                        {% for song in range(singles_len) %}
+
+                            <div id="single-{{1}}" class="single-{{1}}">
+                                <img  id="single-{{1}}-img" class="single-{{1}}" src="single1.jpg" alt="Single 1" />
+                                <h3  id="single-{{1}}-title" class="single-{{1}}">Single Title 1</h3>
+                                <p id="single-{{1}}-date" class="single-{{1}}">Release Year: 2020</p>
+                            </div>
+
+                        {% endfor %}
+
+                    
                     </div>
                 </div>
             </div>
@@ -126,6 +128,58 @@
                    document.getElementById("profile-pic").src = base64Image;
 
                }
+           
+   }
+   });
+
+
+   
+
+   });
+
+   $( document ).ready(function() {
+       
+       $.ajax({
+           url: "/display-bio",
+           success: function( result ) {
+               if(result=="edit your bio in the edit profile section"){
+                   document.getElementById("artist-bio").innerText = "edit your bio in the edit profile section"
+
+               }
+
+               else{
+
+                   
+                   document.getElementById("artist-bio").innerText = result
+
+               }
+           
+   }
+   });
+
+   });
+
+   $( document ).ready(function() {
+       
+       $.ajax({
+           url: "/singles-display",
+           success: function( result ) {
+            for(let i=1;i>result[1];i++){
+
+                //getElementById("single-${i}-img").src = result[0][result-1][2]
+                console.log(i)
+                console.log(document.getElementById("single-${i}-title").innerText = result[0][result-1][0])
+                console.log(document.getElementById("single-${i}-title"))
+                document.getElementById("single-${i}-title").innerText = result[0][result-1][0]
+                
+
+            }
+
+            
+
+                           
+
+                        
            
    }
    });

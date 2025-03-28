@@ -21,14 +21,12 @@ def encode_img_audio_json(json):
 
 
     
-    for row in json:
+    for i,row in enumerate(json):
         row = list(row)
         
         for e,item in enumerate(row):
             if e == 1 or e == 2:
                 row[e] = encode_64(item)
-                
-    #print(json[0][0],json[0][1][0:5],json[0][2][0:5])
-    #print(type(json[1][0]),type(json[1][0]),type(json[1][0]))
+        json[i] = row
 
     return json

@@ -74,14 +74,15 @@
                     <h2>Singles</h2>
                     <div class="single-list">
 
+                        
                         {% for song in range(singles_len) %}
-
-                            <div id="single-{{1}}" class="single-{{1}}">
-                                <img  id="single-{{1}}-img" class="single-{{1}}" src="single1.jpg" alt="Single 1" />
-                                <h3  id="single-{{1}}-title" class="single-{{1}}">Single Title 1</h3>
-                                <p id="single-{{1}}-date" class="single-{{1}}">Release Year: 2020</p>
+                            
+                            <div id="single-{{loop.index}}" class="single" >
+                                <img  id="single-{{loop.index}}-img" class="single-cover" src="" alt= />
+                                <h3  id="single-{{loop.index}}-title" class="single-title">Title</h3>
+                                <p id="single-{{loop.index}}-date" class="single-date">Release Year</p>
                             </div>
-
+                            
                         {% endfor %}
 
                     
@@ -166,14 +167,17 @@
            url: "/singles-display",
            dataType: "json",
            success: function( result ) {
-            console.log("boobs")
-            for(let i=1;i>result[1];i++){
+                
+            for(let i=1;i<result[1]+1;i++){
 
-                //getElementById("single-${i}-img").src = result[0][result-1][2]
-                console.log(i)
-                console.log(document.getElementById("single-${i}-title").innerText = result[0][result-1][0])
-                console.log(document.getElementById("single-${i}-title"))
-                document.getElementById("single-${i}-title").innerText = result[0][result-1][0]
+                console.log(result[0][i-1][1])
+                
+
+                var base64Img = "data:image/jpeg;base64," + result[0][i-1][2];
+                document.getElementById(`single-${i}-img`).src = base64Img
+                document.getElementById(`single-${i}-title`).innerText = result[0][i-1][0];
+                document.getElementById(`single-${i}-date`).innerText= result[0][i-1][3];
+                
                 
 
             }

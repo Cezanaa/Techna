@@ -107,8 +107,10 @@ def profile():
 @app.route("/singles-display")
 @login_required
 def singles_display():
-    print(type(encode_img_audio_json(get_song_data(current_user.id)[0])[0][0]))
-    return jsonify(encode_img_audio_json(get_song_data(current_user.id)[0]))
+    json=encode_img_audio_json(get_song_data(current_user.id)[0])
+    singles_cnt=get_song_data(current_user.id)[1]
+    
+    return jsonify(json,singles_cnt)
 
 # Profile route
 @app.route("/edit-profile", methods=["POST", "GET"])

@@ -191,7 +191,7 @@ def get_bio(Username):
     cursor.close()
     cnx.close()
 
-    return data[0]
+    return data[0]      
 
 
 
@@ -262,7 +262,7 @@ def get_song_data(Username):
     cnx=connect()
     cursor=cnx.cursor()
 
-    query = "SELECT Title,Audio,Cover_art FROM songs s JOIN uporabniki u on s.Artist_ID = u.ID WHERE u.ID = %s"
+    query = "SELECT Title,Audio,Cover_art,YEAR(Release_year) FROM songs s JOIN uporabniki u on s.Artist_ID = u.ID WHERE u.ID = %s"
         
     
 

@@ -24,6 +24,8 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    text-align: center;
 }
 
 .profile-pic {
@@ -43,6 +45,7 @@ body {
 
 .artist-info {
     max-width: 800px;
+    flex: 1;
 }
 
 .artist-name {
@@ -84,7 +87,6 @@ body {
 
 /* Albums Section */
 .albums-section,
-.songs-section,
 .singles-section {
     margin-bottom: 40px;
 }
@@ -102,6 +104,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center; /* Center albums */
 }
 
 .album {
@@ -128,58 +131,46 @@ h2 {
     color: #b3b3b3; /* Light gray */
 }
 
-/* Songs List */
-.song-list {
-    list-style-type: none;
-}
-
-.song {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #333; /* Darker border */
-}
-
-.song-title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: #ffffff;
-}
-
-.song-duration {
-    font-size: 1rem;
-    color: #b3b3b3; /* Light gray */
-}
-
 /* Singles Layout */
 .single-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-wrap: wrap; /* Allow wrapping to the next row if needed */
+    gap: 15px; /* Space between singles */
+    justify-content: center; /* Center the singles in the container */
 }
 
 .single {
-    width: 200px;
+    width: 120px; /* Small square for each single */
+    height: 150px; /* Fixed height for consistency */
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #222; /* Optional: Add a background for better visibility */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    padding: 10px;
 }
 
 .single img {
-    width: 100%;
+    width: 100%; /* Fit the container */
+    height: 100px; /* Fixed height for the image */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
-    margin-bottom: 10px;
-    border: 2px solid #00ffff; /* Neon border */
+    object-fit: cover; /* Ensure the image fits within the dimensions */
+    margin-bottom: 5px;
 }
 
 .single h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+    font-size: 0.9rem; /* Smaller font size for titles */
     color: #ffffff;
+    margin: 0;
 }
 
 .single p {
-    font-size: 1rem;
+    font-size: 0.8rem; /* Smaller font size for release year */
     color: #b3b3b3; /* Light gray */
+    margin: 0;
 }
 
 /* Responsive Design */
@@ -198,10 +189,104 @@ h2 {
         flex-direction: column;
         align-items: center;
     }
-
+ž
     .album,
     .single {
         width: 100%;
         max-width: 300px;
+    }
+
+    .single img {
+        width: 120px; /* Smaller size for tablets */
+        height: 120px;
+    }
+
+    .single {
+        width: 150px; /* Smaller size for tablets */
+    }
+
+    .single img {
+        width: 100%; /* Fit the container */
+        height: auto;
+    }
+
+    .single h3 {
+        font-size: 1rem; /* Adjust font size */
+    }
+
+    .single p {
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .single {
+        width: 100px; /* Smaller size for tablets */
+        height: 130px;
+    }
+
+    .single img {
+        height: 80px; /* Adjust image height */
+    }
+
+    .single h3 {
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .single p {
+        font-size: 0.7rem; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .artist-name {
+        font-size: 1.5rem;
+    }
+
+    .album,
+    .single {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .single img {
+        width: 100px; /* Even smaller size for mobile devices */
+        height: 100px;
+    }
+
+    .single {
+        width: 120px; /* Even smaller size for mobile devices */
+    }
+
+    .single img {
+        width: 100%; /* Fit the container */
+        height: auto;
+    }
+
+    .single h3 {
+        font-size: 0.9rem; /* Adjust font size */
+    }
+
+    .single p {
+        font-size: 0.8rem; /* Adjust font size */
+    }
+
+    .single {
+        width: 80px; /* Even smaller size for mobile devices */
+        height: 110px;
+    }
+
+    .single img {
+        height: 70px; /* Adjust image height */
+    }
+
+    .single h3 {
+        font-size: 0.7rem; /* Adjust font size */
+    }
+
+    .single p {
+        font-size: 0.6rem; /* Adjust font size */
     }
 }

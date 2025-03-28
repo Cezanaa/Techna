@@ -142,6 +142,7 @@
        $.ajax({
            url: "/display-bio",
            success: function( result ) {
+            
                if(result=="edit your bio in the edit profile section"){
                    document.getElementById("artist-bio").innerText = "edit your bio in the edit profile section"
 
@@ -163,7 +164,9 @@
        
        $.ajax({
            url: "/singles-display",
+           dataType: "json",
            success: function( result ) {
+            console.log("boobs")
             for(let i=1;i>result[1];i++){
 
                 //getElementById("single-${i}-img").src = result[0][result-1][2]

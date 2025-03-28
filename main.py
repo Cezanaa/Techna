@@ -5,7 +5,7 @@ from flask import Flask, render_template, redirect, request, url_for,jsonify
 from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt,get_bio,update_bio,upload_song,get_song_data
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle
-from encoding import encode_image,salt_password
+from encoding import encode_64,salt_password,encode_img_audio_json
 
 
 app = Flask(__name__)
@@ -90,7 +90,9 @@ def sign_up():
 @app.route("/home")
 @login_required
 def home():
-    print(jsonify(get_song_data("test")))
+
+    
+    
     return render_template("home.html")
 
 # Profile route
@@ -105,8 +107,8 @@ def profile():
 @app.route("/singles-display")
 @login_required
 def singles_display():
-
-    return jsonify(get_song_data(current_user.id))
+    print(type(encode_img_audio_json(get_song_data(current_user.id)[0])[0][0]))
+    return jsonify(encode_img_audio_json(get_song_data(current_user.id)[0]))
 
 # Profile route
 @app.route("/edit-profile", methods=["POST", "GET"])
@@ -151,7 +153,7 @@ def display_profile_pic():
     if not get_profile_pic(current_user.id):
         return "static/default_profile_pic.png"
 
-    return encode_image(get_profile_pic(current_user.id))
+    return encode_64(get_profile_pic(current_user.id))
 
 
 @app.route("/display-bio", methods=["POST", "GET"])

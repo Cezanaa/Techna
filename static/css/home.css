@@ -1,0 +1,118 @@
+/* Scope styles to the home page */
+.home-page .search-bar {
+    width: 90%; /* Longer search bar */
+    max-width: 800px; /* Maximum width for larger screens */
+    padding: 12px 15px; /* Padding inside the search bar */
+    font-size: 1rem; /* Font size for the text */
+    border: none; /* Remove border */
+    border-radius: 25px; /* More rounded edges */
+    outline: none;
+    background-color: #282828; /* Dark gray background */
+    color: #ffffff; /* White text */
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    margin: 20px auto; /* Adds vertical spacing and centers the search bar horizontally */
+    display: block; /* Ensures it behaves like a block element */
+}
+
+.home-page .search-bar::placeholder {
+    color: #b3b3b3; /* Light gray placeholder text */
+}
+
+.home-page .search-bar:focus {
+    background-color: #333; /* Slightly lighter gray on focus */
+    box-shadow: none; /* Removes any glow effect */
+}
+
+/* Main Content Section */
+.home-page .content {
+    flex: 1; /* Allow .content to take up the remaining space */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align content to the top */
+    align-items: center; /* Center content horizontally */
+    padding: 20px; /* Add consistent padding */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    height: auto; /* Let the height adjust naturally */
+    margin-top: 70px; /* Add margin to account for the fixed navbar */
+    margin-left: 15%; /* Add margin to account for the fixed sidebar */
+    box-sizing: border-box; /* Ensure padding and margins are included in the width/height */
+}
+
+/* Heading for Featured Playlists */
+.home-page .content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px; /* Add spacing below the heading */
+    color: #ffffff; /* White text for the heading */
+    text-align: center; /* Center the heading text */
+    width: 100%; /* Ensure the heading spans the full width */
+}
+
+/* Playlist Grid */
+.home-page .playlist-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the playlist cards horizontally */
+    gap: 20px; /* Space between playlist cards */
+    width: 100%; /* Ensure it doesn't overflow */
+    margin-top: 0; /* Remove extra margin above the grid */
+}
+
+/* Playlist Cards */
+.home-page .playlist-card {
+    width: 200px;
+    background-color: #282828; /* Dark gray background for cards */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 10px;
+}
+
+.home-page .playlist-card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.home-page .playlist-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover; /* Ensures the image fits perfectly */
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.home-page .playlist-card h3 {
+    font-size: 1.2rem;
+    color: #ffffff; /* White text for the playlist title */
+    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-page .playlist-card {
+        width: 150px; /* Smaller cards for tablets */
+    }
+
+    .home-page .search-bar {
+        width: 95%; /* Slightly narrower search bar */
+    }
+
+    .home-page .content {
+        margin-left: 0; /* Remove sidebar margin for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .home-page .playlist-card {
+        width: 100%; /* Full-width cards for mobile */
+    }
+
+    .home-page .search-bar {
+        width: 100%; /* Full-width search bar for mobile */
+    }
+
+    .home-page .content h2 {
+        font-size: 1.5rem; /* Smaller heading for mobile */
+    }
+}

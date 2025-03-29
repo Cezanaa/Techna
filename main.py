@@ -153,7 +153,7 @@ def edit_profile():
 def display_profile_pic():
     
     if not get_profile_pic(current_user.id):
-        return "static/default_profile_pic.png"
+        return "static/images/default_profile_pic.png"
 
     return encode_64(get_profile_pic(current_user.id))
 

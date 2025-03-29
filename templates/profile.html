@@ -1,198 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Music Streaming</title>
-    <link rel="stylesheet" href="static/profile.css">
-    <link rel="stylesheet" href="static/home.css"> <!-- Include the home.css for sidebar and footer -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <img src="static/images/logo.png" alt="Techna Logo">
-                <h1>Techna</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Your Library</a></li>
-            </ul>
-            <div class="playlists">
-                <h3>Playlists</h3>
-                <ul>
-                    <li><a href="#">Hardcore Beats</a></li>
-                    <li><a href="#">Dark Techno</a></li>
-                    <li><a href="#">Underground Vibes</a></li>
-                </ul>
-            </div>
+{% extends "base.html" %}
+
+{% block title %}Profile - Techna{% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">      
+{% endblock %}
+
+{% block libary %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>      
+{% endblock %} 
+
+{% block content %}
+<div class="profile-container">
+    <!-- Profile Header Section -->
+    <div class="profile-header">
+        <div class="profile-pic">
+            <img id="profile-pic" src="profile-pic.jpg" alt="Profile Picture" />
         </div>
+        <div class="artist-info">
+            <h1 class="artist-name">{{ current_user.id }}</h1>
+            <p id="artist-bio" class="artist-bio">Short bio about the artist.</p>
+            <p class="followers-count">Followers: <span id="followers-count">{{ current_user.followers }}</span></p>
+            <a href="{{ url_for('edit_profile') }}" class="edit-profile-link">Edit Profile</a>
+        </div>
+    </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="profile-container">
-                <!-- Profile Header Section -->
-                <div class="profile-header">
-                    <div class="profile-pic">
-                        
-                        <img id="profile-pic" src=""  />
-                    </div>
-                    
-
-                    <div class="artist-info">
-                        <h1 class="artist-name">{{current_user.id}}</h1>
-                        <p  id="artist-bio" class="artist-bio">Short bio about the artist. This can include information about their music style, achievements, and more.</p>
-                        <p class="followers-count">Followers: <span id="followers-count">{{current_user.followers}}</span></p>
-                        <!-- Edit Profile link -->
-                        <a href="{{ url_for('edit_profile') }}" class="edit-profile-link">Edit Profile</a>
-                    </div>
-                </div>
-
-                <!-- Albums Section -->
-                <div class="albums-section">
-                    <h2>Albums</h2>
-                    <div class="album-list">
-                        <div class="album">
-                            <img src="album1.jpg" alt="Album 1" />
-                            <h3>Album Name 1</h3>
-                            <p>Release Year: 2021</p>
-                        </div>
-                        <div class="album">
-                            <img src="album2.jpg" alt="Album 2" />
-                            <h3>Album Name 2</h3>
-                            <p>Release Year: 2019</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Singles Section -->
-                <div class="singles-section">
-                    <h2>Singles</h2>
-                    <div class="single-list">
-
-                        
-                        {% for song in range(singles_len) %}
-                            
-                            <div id="single-{{loop.index}}" class="single" >
-                                <img  id="single-{{loop.index}}-img" class="single-cover" src="" alt= />
-                                <h3  id="single-{{loop.index}}-title" class="single-title">Title</h3>
-                                <p id="single-{{loop.index}}-date" class="single-date">Release Year</p>
-                            </div>
-                            
-                        {% endfor %}
-
-                    
-                    </div>
-                </div>
+    <!-- Albums Section -->
+    <div class="albums-section">
+        <h2>Albums</h2>
+        <div class="album-list">
+            <div class="album">
+                <img src="album1.jpg" alt="Album 1" />
+                <h3>Album Name 1</h3>
+                <p>Release Year: 2021</p>
+            </div>
+            <div class="album">
+                <img src="album2.jpg" alt="Album 2" />
+                <h3>Album Name 2</h3>
+                <p>Release Year: 2019</p>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="now-playing">
-            <img src="static/images/album.jpg" alt="Album Art">
-            <div class="song-info">
-                <h4>Song Title</h4>
-                <p>Artist Name</p>
+    <!-- Singles Section -->
+    <div class="singles-section">
+        <h2>Singles</h2>
+        <div class="single-list">
+            {% for song in range(singles_len) %}
+            <div id="single-{{ loop.index }}" class="single">
+                <img id="single-{{ loop.index }}-img" class="single-cover" src="single-cover.jpg" alt="Single Cover" />
+                <h3 id="single-{{ loop.index }}-title" class="single-title">Title</h3>
+                <p id="single-{{ loop.index }}-date" class="single-date">Release Year</p>
             </div>
-        </div>
-        <div class="controls">
-            <button>⏮</button>
-            <button>⏯</button>
-            <button>⏭</button>
-        </div>
-        <div class="volume">
-            <label for="volume">Volume</label>
-            <input type="range" id="volume" min="0" max="100">
+            {% endfor %}
         </div>
     </div>
-</body>
-<script>
-    $( document ).ready(function() {
-       
-       $.ajax({
-           url: "/display-profile-pic",
-           success: function( result ) {
-               if(result=="static/default_profile_pic.png"){
-                   document.getElementById("profile-pic").src = result
+</div>
+{% block script %}
 
-               }
-
-               else{
-
-                   var base64Image = "data:image/jpeg;base64," + result;
-                   document.getElementById("profile-pic").src = base64Image;
-
-               }
-           
-   }
-   });
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+{% endblock %}
 
 
-   
-
-   });
-
-   $( document ).ready(function() {
-       
-       $.ajax({
-           url: "/display-bio",
-           success: function( result ) {
-            
-               if(result=="edit your bio in the edit profile section"){
-                   document.getElementById("artist-bio").innerText = "edit your bio in the edit profile section"
-
-               }
-
-               else{
-
-                   
-                   document.getElementById("artist-bio").innerText = result
-
-               }
-           
-   }
-   });
-
-   });
-
-   $( document ).ready(function() {
-       
-       $.ajax({
-           url: "/singles-display",
-           dataType: "json",
-           success: function( result ) {
-                
-            for(let i=1;i<result[1]+1;i++){
-
-                console.log(result[0][i-1][1])
-                
-
-                var base64Img = "data:image/jpeg;base64," + result[0][i-1][2];
-                document.getElementById(`single-${i}-img`).src = base64Img
-                document.getElementById(`single-${i}-title`).innerText = result[0][i-1][0];
-                document.getElementById(`single-${i}-date`).innerText= result[0][i-1][3];
-                
-                
-
-            }
-
-            
-
-                           
-
-                        
-           
-   }
-   });
-
-   });
+{% endblock %}
 
 
-</script>
 </html>

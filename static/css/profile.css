@@ -1,0 +1,204 @@
+
+.profile-container * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Profile Container */
+.profile-container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the profile container */
+    padding: 20px;
+}
+
+/* Profile Header Section */
+.profile-header {
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    gap: 20px; /* Adds space between profile picture and text */
+    margin-bottom: 40px;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* Makes the profile picture circular */
+    overflow: hidden;
+    border: 2px solid #444; /* Subtle gray border */
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    flex: 1; /* Allows the text section to grow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.artist-name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.artist-bio {
+    font-size: 1rem;
+    color: #b3b3b3; /* Light gray for bio text */
+    margin-bottom: 10px;
+}
+
+.followers-count {
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Light gray for followers count */
+    margin-bottom: 10px;
+}
+
+.edit-profile-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #444; /* Neutral gray background */
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-link:hover {
+    background-color: #555; /* Slightly darker gray on hover */
+}
+
+/* Albums Section */
+.albums-section {
+    margin-bottom: 40px;
+}
+
+.albums-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.album-list {
+    display: flex;
+    justify-content: flex-start; /* Aligns albums to the left */
+    gap: 15px; /* Adds space between albums */
+    flex-wrap: wrap; /* Wraps albums to the next row if needed */
+}
+
+.album {
+    background-color: #282828; /* Dark gray background for albums */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.album img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.album h3 {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.album p {
+    font-size: 0.8rem;
+    color: #b3b3b3; /* Light gray for release year */
+}
+
+.album:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Singles Section */
+.singles-section {
+    margin-bottom: 40px;
+}
+
+.singles-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.single-list {
+    display: flex;
+    justify-content: flex-start; /* Aligns singles to the left */
+    gap: 15px; /* Adds space between singles */
+    flex-wrap: wrap; /* Wraps singles to the next row if needed */
+}
+
+.single {
+    background-color: #282828; /* Dark gray background for singles */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    text-align: center;
+    width: 150px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.single img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.single h3 {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.single p {
+    font-size: 0.8rem;
+    color: #b3b3b3; /* Light gray for release year */
+}
+
+.single:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .album,
+    .single {
+        width: 120px; /* Smaller cards for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .artist-name {
+        font-size: 1.5rem; /* Smaller font size for mobile */
+    }
+
+    .artist-bio {
+        font-size: 0.9rem; /* Smaller font size for mobile */
+    }
+
+    .album,
+    .single {
+        width: 100%; /* Full-width cards for mobile */
+    }
+}

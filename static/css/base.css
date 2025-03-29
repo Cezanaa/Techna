@@ -1,0 +1,499 @@
+/* General Styles */
+/* General Background Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background for a modern look */
+    color: #ffffff; /* White text for contrast */
+    background-image: url("../images/background-pattern.png"); /* Optional background image */
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed while scrolling */
+}
+
+/* Prevent Horizontal Scrolling */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+/* Layout Container */
+.layout-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Sidebar */
+.layout-sidebar {
+    width: 15%; /* Consistent width */
+    background-color: #181818;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    position: fixed; /* Fix the sidebar to the left side of the screen */
+    top: 0;
+    left: 0;
+    height: calc(100vh - 70px); /* Adjust height to account for the fixed footer */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    z-index: 1000; /* Ensure it stays above other elements */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.sidebar-logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ffff; /* Neon blue */
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Neon glow effect */
+    margin: 0;
+}
+
+.sidebar-nav-links,
+.sidebar-playlists ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav-links li,
+.sidebar-playlists ul li {
+    margin: 10px 0;
+}
+
+.sidebar-nav-links li a,
+.sidebar-playlists ul li a {
+    text-decoration: none;
+    color: #b3b3b3; /* Light gray text */
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.sidebar-nav-links li a:hover,
+.sidebar-playlists ul li a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+.sidebar-playlists h3 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* Main Content */
+.layout-main-content {
+    flex: 1; /* Allow .layout-main-content to take up the remaining space */
+    margin-left: 15%; /* Add margin to account for the fixed sidebar */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    height: calc(100vh - 70px); /* Adjust height to account for the fixed footer */
+    padding: 20px; /* Add padding for better spacing */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+/* Footer */
+.layout-footer {
+    width: 100%; /* Ensure the footer spans the full width */
+    height: 70px;
+    background-color: #181818;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between sections */
+    padding: 0 20px; /* Add padding inside the footer */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    position: fixed; /* Fix the footer to the bottom of the screen */
+    bottom: 0;
+    left: 0; /* Ensure it starts at the left edge */
+    z-index: 1000; /* Ensure it stays above other elements */
+    overflow: hidden; /* Prevent any overflow inside the footer */
+}
+
+.footer-now-playing {
+    display: flex;
+    align-items: center;
+}
+
+.footer-now-playing img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.footer-song-info h4 {
+    font-size: 14px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.footer-song-info p {
+    font-size: 12px;
+    margin: 0;
+    color: #b3b3b3;
+}
+
+.footer-controls {
+    display: flex;
+    justify-content: center; /* Center the controls */
+    align-items: center;
+}
+
+/* Footer Controls */
+.footer-controls {
+    display: flex;
+    justify-content: center; /* Center the controls horizontally */
+    align-items: center; /* Center the controls vertically */
+    flex: 1; /* Allow the controls to take up available space */
+    position: absolute; /* Position it in the middle of the footer */
+    left: 50%; /* Move to the horizontal center */
+    transform: translateX(-50%); /* Adjust for centering */
+}
+
+/* Play Button */
+.footer-controls button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px; /* Slightly larger size for better visibility */
+    cursor: pointer;
+    margin: 0 15px; /* Add spacing between buttons */
+    transition: color 0.3s ease;
+}
+
+.footer-controls button:hover {
+    color: #666666; /* Subtle gray on hover */
+}
+
+/* Footer Volume */
+.footer-volume {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: absolute; /* Position it explicitly */
+    right: 50px; /* Move it slightly more to the left */
+    bottom: 50%; /* Center vertically within the footer */
+    transform: translateY(50%); /* Adjust for centering */
+}
+
+.footer-volume label {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer-volume input[type="range"] {
+    width: 150px;
+    cursor: pointer;
+}
+
+/* Styled Volume Slider */
+.footer-volume input[type="range"] {
+    -webkit-appearance: none; /* Remove default styling */
+    width: 150px;
+    height: 5px; /* Slimmer slider */
+    background: #444; /* Dark gray background */
+    border-radius: 5px; /* Rounded edges */
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.footer-volume input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default thumb styling */
+    width: 15px;
+    height: 15px;
+    background: #ffffff; /* White thumb */
+    border-radius: 50%; /* Circular thumb */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Subtle glow effect */
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.footer-volume input[type="range"]::-webkit-slider-thumb:hover {
+    background: #dddddd; /* Lighter gray on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.footer-volume input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.footer-volume input[type="range"]::-moz-range-thumb:hover {
+    background: #dddddd;
+    transform: scale(1.1);
+}
+
+/* Updated Container Sidebar */
+.container-sidebar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Default Sidebar Width */
+.sidebar {
+    width: 15%; /* Default width for larger screens */
+    background-color: #181818;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Adjust Sidebar Width for Tablets */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 18%; /* Slightly wider for tablets */
+    }
+}
+
+/* Adjust Sidebar Width for Smaller Screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 20%; /* Adjust sidebar width for tablets */
+    }
+
+    .footer {
+        flex-direction: column; /* Stack footer sections vertically */
+        height: auto;
+        padding: 10px;
+    }
+
+    .footer .controls {
+        margin: 10px 0;
+    }
+
+    .footer .volume input[type="range"] {
+        width: 100px; /* Reduce volume slider width */
+    }
+}
+
+/* Adjust Sidebar Width for Mobile */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 25%; /* Adjust sidebar width for mobile */
+    }
+
+    .footer {
+        flex-direction: column; /* Stack footer sections vertically */
+        height: auto;
+        padding: 10px;
+    }
+
+    .footer .controls {
+        margin: 10px 0;
+    }
+
+    .footer .volume input[type="range"] {
+        width: 80px; /* Further reduce volume slider width */
+    }
+}
+
+/* Sidebar (Navbar) */
+.sidebar {
+    width: 15%; /* Sidebar width */
+    background-color: #181818; /* Dark background */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.sidebar .logo h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ffff; /* Neon blue */
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Neon glow effect */
+    margin: 0;
+}
+
+.sidebar .nav-links,
+.sidebar .playlists ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .nav-links li,
+.sidebar .playlists ul li {
+    margin: 10px 0;
+}
+
+.sidebar .nav-links li a,
+.sidebar .playlists ul li a {
+    text-decoration: none;
+    color: #b3b3b3; /* Light gray text */
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.sidebar .nav-links li a:hover,
+.sidebar .playlists ul li a:hover {
+    color: #ffffff; /* White on hover */
+}
+
+.sidebar .playlists h3 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    height: 70px;
+    background-color: #181818;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space between the sections */
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+}
+
+.footer .now-playing {
+    display: flex;
+    align-items: center;
+}
+
+.footer .now-playing img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.footer .now-playing .song-info h4 {
+    font-size: 14px;
+    margin: 0;
+    color: #ffffff;
+}
+
+.footer .now-playing .song-info p {
+    font-size: 12px;
+    margin: 0;
+    color: #b3b3b3;
+}
+
+.footer .controls {
+    display: flex;
+    justify-content: center; /* Center the controls */
+    align-items: center;
+}
+
+.footer .controls button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 15px;
+    transition: color 0.3s;
+}
+
+.footer .controls button:hover {
+    color: #1db954; /* Spotify green */
+}
+
+.footer .volume {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align volume control to the right */
+    gap: 10px;
+}
+
+.footer .volume label {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.footer .volume input[type="range"] {
+    width: 150px;
+    cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1; /* Allow .main-content to take up the remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 20%; /* Adjust sidebar width for tablets */
+    }
+
+    .footer {
+        flex-direction: column; /* Stack footer sections vertically */
+        height: auto;
+        padding: 10px;
+    }
+
+    .footer .controls {
+        margin: 10px 0;
+    }
+
+    .footer .volume input[type="range"] {
+        width: 100px; /* Reduce volume slider width */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 25%; /* Adjust sidebar width for mobile */
+    }
+
+    .footer {
+        flex-direction: column; /* Stack footer sections vertically */
+        height: auto;
+        padding: 10px;
+    }
+
+    .footer .controls {
+        margin: 10px 0;
+    }
+
+    .footer .volume input[type="range"] {
+        width: 80px; /* Further reduce volume slider width */
+    }
+}

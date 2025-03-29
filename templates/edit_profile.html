@@ -1,169 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <link rel="stylesheet" href="static/edit_profile.css">
-    <link rel="stylesheet" href="static/home.css"> <!-- Include home.css for sidebar and footer -->
-</head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<body>
-    <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="logo">
-                <img src="static/images/logo.png" alt="Techna Logo">
-                <h1>Techna</h1>
-            </div>
-            <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                <li><a href="#">Search</a></li>
-                <li><a href="#">Your Library</a></li>
-            </ul>
-            <div class="playlists">
-                <h3>Playlists</h3>
-                <ul>
-                    <li><a href="#">Hardcore Beats</a></li>
-                    <li><a href="#">Dark Techno</a></li>
-                    <li><a href="#">Underground Vibes</a></li>
-                </ul>
-            </div>
-        </div>
+{% extends "base.html" %}
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <div class="edit-profile-container">
-                <!-- Profile Picture Section -->
-                <div class="profile-pic-section">
-                    
-                    <img id="profile-pic" class="profile-pic" src="" />
-                    
-                </div>
-                
-                <!-- Edit Profile Form Section -->
-                <div class="edit-profile-container">
-                    <!-- Left Box: Update Bio and Change Profile Picture -->
-                    <div class="left-box">
-                        <div class="edit-profile-form-section">
-                            <!-- Update Bio Form -->
-                            <div class="form-wrapper">
-                                <div class="form-container">
-                                    <h2>Update Bio</h2>
-                                    <form method="POST" enctype="multipart/form-data" class="update-bio-form">
-                                        {{ update_bio_form.hidden_tag() }}
-                                        <div class="form-group">
-                                            <label for="Bio">{{ update_bio_form.Bio.label }}</label>
-                                            {{ update_bio_form.Bio(class="form-control bio-input", placeholder="Update your bio") }}
-                                        </div>
-                                        <div class="form-group">
-                                            {{ update_bio_form.Submit(class="submit-button update-button") }}
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+{% block title %}Edit Profile - Techna{% endblock %}
 
-                            <!-- Change Profile Picture Form -->
-                            <div class="form-wrapper">
-                                <div class="form-container">
-                                    <h2>Change Profile Picture</h2>
-                                    <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
-                                        {{ update_profile_pic_form.hidden_tag() }}
-                                        <div class="form-group">
-                                            <label for="ProfilePic">{{ update_profile_pic_form.ProfilePic.label }}</label>
-                                            <div class="file-input-container">
-                                                {{ update_profile_pic_form.ProfilePic(class="form-control file-input", title="Choose a profile picture") }}
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            {{ update_profile_pic_form.Submit(class="submit-button change-button") }}
-                                        </div>
-                                    </form>
-                                </div>
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}">     
+{% endblock %}
+
+{% block libary %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>      
+{% endblock %}
+
+{% block content %}
+<div class="edit-profile-container">
+    <!-- Profile Picture Section -->
+    <div class="profile-pic-section">
+        <img id="profile-pic" class="profile-pic" src="" alt="Profile Picture" />
+    </div>
+
+    <!-- Edit Profile Form Section -->
+    <div class="edit-profile-container">
+        <!-- Left Box: Update Bio and Change Profile Picture -->
+        <div class="left-box">
+            <div class="edit-profile-form-section">
+                <!-- Update Bio Form -->
+                <div class="form-wrapper">
+                    <div class="form-container">
+                        <h2>Update Bio</h2>
+                        <form method="POST" enctype="multipart/form-data" class="update-bio-form">
+                            {{ update_bio_form.hidden_tag() }}
+                            <div class="form-group">
+                                <label for="Bio">{{ update_bio_form.Bio.label }}</label>
+                                {{ update_bio_form.Bio(class="form-control bio-input", placeholder="Update your bio") }}
                             </div>
-                        </div>
+                            <div class="form-group">
+                                {{ update_bio_form.Submit(class="submit-button update-button") }}
+                            </div>
+                        </form>
                     </div>
+                </div>
 
-                    <!-- Right Box: Upload a Single -->
-                    <div class="right-box">
-                        <div class="form-wrapper">
-                            <div class="form-container">
-                                <h2>Upload a Single</h2>
-                                <form method="POST" enctype="multipart/form-data" class="upload-single-form">
-                                    {{ uploas_single_form.hidden_tag() }}
-                                    <div class="form-group">
-                                        <label for="Title">{{ uploas_single_form.Title.label }}</label>
-                                        {{ uploas_single_form.Title(class="form-control", placeholder="Enter the song title") }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Audio">{{ uploas_single_form.Audio.label }}</label>
-                                        {{ uploas_single_form.Audio(class="form-control file-input", title="Choose an audio file") }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="CoverArt">{{ uploas_single_form.CoverArt.label }}</label>
-                                        {{ uploas_single_form.CoverArt(class="form-control file-input", title="Choose cover art") }}
-                                    </div>
-                                    <div class="form-group">
-                                        {{ uploas_single_form.Submit(class="submit-button upload-button") }}
-                                    </div>
-                                </form>
+                <!-- Change Profile Picture Form -->
+                <div class="form-wrapper">
+                    <div class="form-container">
+                        <h2>Change Profile Picture</h2>
+                        <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
+                            {{ update_profile_pic_form.hidden_tag() }}
+                            <div class="form-group">
+                                <label for="ProfilePic">{{ update_profile_pic_form.ProfilePic.label }}</label>
+                                <div class="file-input-container">
+                                    {{ update_profile_pic_form.ProfilePic(class="form-control file-input", title="Choose a profile picture") }}
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                {{ update_profile_pic_form.Submit(class="submit-button change-button") }}
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <div class="now-playing">
-            <img src="static/images/album.jpg" alt="Album Art">
-            <div class="song-info">
-                <h4>Song Title</h4>
-                <p>Artist Name</p>
+        <!-- Right Box: Upload a Single -->
+        <div class="right-box">
+            <div class="form-wrapper">
+                <div class="form-container">
+                    <h2>Upload a Single</h2>
+                    <form method="POST" enctype="multipart/form-data" class="upload-single-form">
+                        {{ uploas_single_form.hidden_tag() }}
+                        <div class="form-group">
+                            <label for="Title">{{ uploas_single_form.Title.label }}</label>
+                            {{ uploas_single_form.Title(class="form-control", placeholder="Enter the song title") }}
+                        </div>
+                        <div class="form-group">
+                            <label for="Audio">{{ uploas_single_form.Audio.label }}</label>
+                            {{ uploas_single_form.Audio(class="form-control file-input", title="Choose an audio file") }}
+                        </div>
+                        <div class="form-group">
+                            <label for="CoverArt">{{ uploas_single_form.CoverArt.label }}</label>
+                            {{ uploas_single_form.CoverArt(class="form-control file-input", title="Choose cover art") }}
+                        </div>
+                        <div class="form-group">
+                            {{ uploas_single_form.Submit(class="submit-button upload-button") }}
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="controls">
-            <button>⏮</button>
-            <button>⏯</button>
-            <button>⏭</button>
-        </div>
-        <div class="volume">
-            <label for="volume">Volume</label>
-            <input type="range" id="volume" min="0" max="100">
-        </div>
     </div>
-</body>
+</div>
 
-<script>
-     $( document ).ready(function() {
-        
-        $.ajax({
-            url: "/display-profile-pic",
-            success: function( result ) {
-                if(result=="static/default_profile_pic.png"){
-                    document.getElementById("profile-pic").src = result
-
-                }
-
-                else{
-
-                    var base64Image = "data:image/jpeg;base64," + result;
-                    document.getElementById("profile-pic").src = base64Image;
-
-                }
-
-            
-                
-    }
-    });
-
-    });
- 
-
-</script>
+{% block script %}
+<script src="{{ url_for('static', filename='js/edit_profile.js') }}"></script>
+{% endblock %}
 
 
-</html>
+{% endblock %}

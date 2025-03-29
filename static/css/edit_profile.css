@@ -1,17 +1,5 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #121212; /* Dark background */
-    color: #ffffff; /* White text */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-/* General Fix for Overflow */
-* {
+/* General Reset for Edit Profile Page */
+.edit-profile-container * {
     box-sizing: border-box; /* Ensures padding and borders are included in width/height calculations */
 }
 
@@ -22,76 +10,65 @@ body {
     padding: 10px;
 }
 
-/* Main Content */
-.main-content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 /* Edit Profile Container */
 .edit-profile-container {
     display: flex;
-    gap: 20px; /* Space between the two boxes */
-    justify-content: space-between; /* Distribute space between the boxes */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    width: 100%;
-    max-width: 1000px; /* Slightly increase the maximum width */
-    margin: 0 auto; /* Center the container */
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px; /* Reduce the width of the main container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px 20px 40px; /* Add padding at the bottom */
 }
 
 /* Left Box */
-.left-box {
-    flex: 2.2; /* Slightly increase the width of the left box */
+.edit-profile-container .left-box {
+    flex: 2;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between forms in the left box */
-    background-color: #1e1e1e; /* Slightly lighter dark background */
-    padding: 30px; /* Increase padding for better spacing */
+    gap: 20px;
+    background-color: #1e1e1e;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    min-height: 400px; /* Ensure the left box has enough vertical space */
 }
 
 /* Right Box */
-.right-box {
-    flex: 1.2; /* Slightly increase the width of the right box */
+.edit-profile-container .right-box {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between forms in the right box */
-    background-color: #1e1e1e; /* Slightly lighter dark background */
-    padding: 30px; /* Increase padding for better spacing */
+    gap: 20px;
+    background-color: #1e1e1e;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    min-height: 400px; /* Ensure the right box has enough vertical space */
 }
 
 /* Profile Picture Section */
-.profile-pic-section {
+.edit-profile-container .profile-pic-section {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.profile-pic {
-    width: 100px; /* Smaller size for responsiveness */
-    height: 100px;
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover; /* Ensures the image scales properly */
-    border: 3px solid #888; /* Subtle gray border */
+.edit-profile-container .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #888;
     display: block;
     margin: 0 auto;
 }
 
 /* Form Wrapper */
-.form-wrapper {
+.edit-profile-container .form-wrapper {
     margin-bottom: 20px; /* Add spacing between the two forms */
     width: 100%; /* Ensure it fits within the parent container */
 }
 
 /* Form Container */
-.form-container {
-    background-color: #1e1e1e; /* Slightly lighter dark background */
+.edit-profile-container .form-container {
+    background-color: #282828; /* Slightly lighter dark background */
     padding: 20px; /* Increase padding for better spacing */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -100,8 +77,8 @@ body {
     overflow: hidden; /* Prevent content overflow */
 }
 
-.form-container h2 {
-    font-size: 1.2rem; /* Adjust font size for responsiveness */
+.edit-profile-container .form-container h2 {
+    font-size: 1.5rem; /* Adjust font size for responsiveness */
     color: #ffffff;
     margin-bottom: 10px;
     text-align: center;
@@ -138,35 +115,36 @@ body {
 }
 
 /* Form Group */
-.form-group {
+.edit-profile-container .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px; /* Space between label and input */
+    margin-bottom: 15px;
 }
 
-label {
-    font-size: 0.9rem; /* Adjust font size for responsiveness */
+.edit-profile-container .form-group label {
+    font-size: 1rem; /* Adjust font size for responsiveness */
     color: #b3b3b3; /* Light gray */
+    margin-bottom: 5px;
+    display: block;
 }
 
 /* Input Fields */
-.form-control,
-.file-input,
-.bio-input {
+.edit-profile-container .form-group input,
+.edit-profile-container .form-group textarea {
     width: 100%;
-    padding: 8px;
-    font-size: 0.9rem;
-    border: 1px solid #444; /* Subtle dark gray border */
-    border-radius: 4px;
-    background-color: #282828; /* Dark gray */
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #333; /* Subtle dark gray border */
+    border-radius: 5px;
+    background-color: #1e1e1e; /* Dark gray */
     color: #ffffff;
 }
 
-.form-control:focus,
-.file-input:focus,
-.bio-input:focus {
+.edit-profile-container .form-group input:focus,
+.edit-profile-container .form-group textarea:focus {
     outline: none;
-    border-color: #666; /* Slightly lighter gray on focus */
+    border-color: #1db954; /* Spotify green */
 }
 
 /* Hide the "No file chosen" text */
@@ -181,6 +159,21 @@ input[type="file"] {
 }
 
 /* Buttons */
+.edit-profile-container .submit-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #1db954; /* Spotify green */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-container .submit-button:hover {
+    background-color: #1ed760; /* Slightly lighter green */
+}
+
 .submit-button,
 .change-button,
 .update-button {
@@ -220,16 +213,22 @@ input[type="file"] {
 
 /* Upload Single Form */
 .upload-single-form {
-    margin-top: 20px; /* Add spacing between the forms */
+    margin-top: 15px; /* Slightly reduce spacing */
+    padding: 15px; /* Reduce padding */
+    background-color: #2a2a2a; /* Match the form container background */
+    border-radius: 6px; /* Slightly smaller border radius */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+    max-width: 80%; /* Reduce width */
+    margin: 0 auto; /* Center the form */
     display: flex;
     flex-direction: column;
     gap: 15px; /* Increase the space between form elements */
 }
 
-.upload-button {
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    background-color: #333; /* Subtle dark gray */
+.upload-single-form .upload-button {
+    padding: 8px 15px; /* Reduce button size */
+    font-size: 0.85rem; /* Slightly smaller font */
+    background-color: #444444; /* Neutral dark gray */
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -237,9 +236,37 @@ input[type="file"] {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.upload-button:hover {
-    background-color: #555; /* Slightly lighter gray on hover */
-    color: #ddd; /* Softer white text on hover */
+.upload-single-form .upload-button:hover {
+    background-color: #666666; /* Slightly lighter gray on hover */
+    color: #dddddd; /* Softer white text on hover */
+}
+
+.upload-single-form input[type="file"] {
+    font-size: 0.85rem; /* Smaller font size for file input */
+    padding: 8px; /* Reduce padding */
+    background-color: #1e1e1e; /* Match the input background */
+    color: #ffffff;
+    border: 1px solid #333; /* Subtle border */
+    border-radius: 4px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #2a2a2a; /* Dark gray background for the track */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555555; /* Subtle gray for the thumb */
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #777777; /* Slightly lighter gray on hover */
 }
 
 /* Responsive Design */
@@ -248,18 +275,18 @@ input[type="file"] {
         flex-direction: column; /* Stack boxes vertically on smaller screens */
     }
 
-    .left-box,
-    .right-box {
+    .edit-profile-container .left-box,
+    .edit-profile-container .right-box {
         flex: 1; /* Take full width */
         min-height: unset; /* Remove minimum height on smaller screens */
     }
 
-    .profile-pic {
-        width: 80px; /* Smaller size for smaller screens */
-        height: 80px;
+    .edit-profile-container .profile-pic {
+        width: 100px; /* Smaller size for smaller screens */
+        height: 100px;
     }
 
-    .form-container h2 {
+    .edit-profile-container .form-container h2 {
         font-size: 1rem; /* Smaller font size for headings */
     }
 
@@ -290,14 +317,15 @@ input[type="file"] {
 @media (max-width: 480px) {
     .edit-profile-container {
         width: 100%; /* Take full width on very small screens */
+        padding: 10px;
     }
 
-    .profile-pic {
-        width: 70px;
-        height: 70px;
+    .edit-profile-container .profile-pic {
+        width: 80px;
+        height: 80px;
     }
 
-    .form-container h2 {
-        font-size: 0.9rem;
+    .edit-profile-container .form-container h2 {
+        font-size: 1.2rem;
     }
 }

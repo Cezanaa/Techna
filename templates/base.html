@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Techna{% endblock %}</title>
+    <title></title>
     
    
-    <!-- Link CSS files -->
-    {% block link %}
-    {% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <!-- Include jQuery -->
-    {% block libary %}
-    {% endblock %}
+    
+    
 </head>
 <body>
     <div class="layout-container">
@@ -23,8 +20,15 @@
                 <h1>Techna</h1>
             </div>
             <ul class="sidebar-nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
+
+                {% set homeCss = url_for('static', filename="css/home.css") %}
+                {% set profileCss = url_for('static', filename="css/profile.css") %}
+                {% set profileJs = url_for('static', filename="js/profile.js") %}
+                <li onclick="Changehtml('home','{{homeCss}}')">Home</li>
+                
+                <li onclick="Changehtml('profile','{{profileCss}}','{{profileJs}}')">Profile</li>
+                
+                
                 <li><a href="#">Search</a></li>
                 <li><a href="#">Your Library</a></li>
             </ul>
@@ -39,10 +43,8 @@
         </div>
 
         <!-- Main Content -->
-        <div class="layout-main-content">
-            {% block content %}
-            <!-- This block will be replaced by child templates -->
-            {% endblock %}
+        <div id="layout-main-content" class="layout-main-content">
+            
         </div>
     </div>
 
@@ -66,8 +68,13 @@
         </div>
     </div>
 
-    <!-- Link JavaScript files -->
-    {% block script %}
-    {% endblock %}
+    <!--<script src="{{ url_for('static', filename='js/profile.js') }}"></script> -->
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">  -->
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">   -->
+    <!--<script src="{{ url_for('static', filename='js/edit_profile.js') }}"></script>-->
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}"> -->
+    
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
+    <script src="./js/base.js"></script>
 </body>
 </html>

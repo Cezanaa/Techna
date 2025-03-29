@@ -1,16 +1,5 @@
-{% extends "base.html" %}
 
-{% block title %}Edit Profile - Techna{% endblock %}
 
-{% block link %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}">     
-{% endblock %}
-
-{% block libary %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>      
-{% endblock %}
-
-{% block content %}
 <div class="edit-profile-container">
     <!-- Profile Picture Section -->
     <div class="profile-pic-section">
@@ -26,7 +15,7 @@
                 <div class="form-wrapper">
                     <div class="form-container">
                         <h2>Update Bio</h2>
-                        <form method="POST" enctype="multipart/form-data" class="update-bio-form">
+                        <form method="POST" enctype="multipart/form-data" class="update-bio-form" action="{{url_for('edit_profile')}}">
                             {{ update_bio_form.hidden_tag() }}
                             <div class="form-group">
                                 <label for="Bio">{{ update_bio_form.Bio.label }}</label>
@@ -43,7 +32,7 @@
                 <div class="form-wrapper">
                     <div class="form-container">
                         <h2>Change Profile Picture</h2>
-                        <form method="POST" enctype="multipart/form-data" class="edit-profile-form">
+                        <form method="POST" enctype="multipart/form-data" class="edit-profile-form" action="{{url_for('edit_profile')}}">
                             {{ update_profile_pic_form.hidden_tag() }}
                             <div class="form-group">
                                 <label for="ProfilePic">{{ update_profile_pic_form.ProfilePic.label }}</label>
@@ -65,7 +54,7 @@
             <div class="form-wrapper">
                 <div class="form-container">
                     <h2>Upload a Single</h2>
-                    <form method="POST" enctype="multipart/form-data" class="upload-single-form">
+                    <form method="POST" enctype="multipart/form-data" class="upload-single-form" action="{{url_for('edit_profile')}}">
                         {{ uploas_single_form.hidden_tag() }}
                         <div class="form-group">
                             <label for="Title">{{ uploas_single_form.Title.label }}</label>
@@ -89,9 +78,5 @@
     </div>
 </div>
 
-{% block script %}
-<script src="{{ url_for('static', filename='js/edit_profile.js') }}"></script>
-{% endblock %}
 
 
-{% endblock %}

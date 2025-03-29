@@ -10,6 +10,7 @@ from encoding import encode_64,salt_password,encode_img_audio_json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "aaaaaaaaaaaaaaaaaaaaa"
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 # Initialize Flask-Login
 login_manager = LoginManager(app)
@@ -47,7 +48,7 @@ def login():
                 Followers = get_followers(Username)
                 user = User(Username, Gmail,Followers)
                 login_user(user)
-                return redirect(url_for("home"))
+                return redirect(url_for("base"))
             else:
                 Password_error = "Incorrect password"
                 return render_template("login.html", Password_error=Password_error, form=form)
@@ -56,6 +57,27 @@ def login():
             return render_template("login.html", Username_error=Username_error, form=form)
     else:
         return render_template("login.html", form=form)
+
+
+@app.route("/base", methods=["POST", "GET"])
+@login_required
+def base():
+    
+    return render_template("base.html")
+
+@app.route("/profile")
+@login_required
+def profile():
+    
+    singles_len = get_song_data(current_user.id)[1]
+    return render_template("profile.html",singles_len=singles_len)
+
+
+@app.route("/home")
+@login_required
+def home():
+    return render_template("home.html")
+
 
 # Logout route
 @app.route("/logout")
@@ -86,23 +108,7 @@ def sign_up():
     else:
         return render_template("sign_up.html", form=form)
 
-# Home route
-@app.route("/home")
-@login_required
-def home():
 
-    
-    
-    return render_template("home.html")
-
-# Profile route
-@app.route("/profile")
-@login_required
-def profile():
-    
-    
-    singles_len = get_song_data(current_user.id)[1]
-    return render_template("profile.html",singles_len=singles_len)
 
 @app.route("/singles-display")
 @login_required
@@ -121,6 +127,7 @@ def edit_profile():
     uploas_single_form = UploadSingle()
 
     if request.method == "POST":
+        print("boobs")
 
         profile_pic = update_profile_pic_form.ProfilePic.data
         bio = update_bio_form.Bio.data
@@ -142,7 +149,7 @@ def edit_profile():
 
             
         
-        return redirect(url_for('edit_profile'))
+        return redirect(url_for("base"))
 
     
     return render_template("edit_profile.html",update_profile_pic_form=update_profile_pic_form,update_bio_form=update_bio_form,uploas_single_form=uploas_single_form)

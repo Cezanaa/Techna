@@ -1,4 +1,5 @@
 
+// prikaze profile pitcure  
      $( document ).ready(function() {
         
         $.ajax({

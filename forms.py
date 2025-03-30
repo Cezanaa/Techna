@@ -4,6 +4,7 @@ from wtforms.validators import data_required,Length,Email,EqualTo
 from flask_wtf.file import FileAllowed
 from email_validator import validate_email,EmailNotValidError
 
+
 class RegistrationForm(FlaskForm):
     Username = StringField('Username',validators=[data_required(),Length(min=4,max=15)])
     Password = PasswordField('Password',validators=[data_required(),Length(min=5)])
@@ -28,6 +29,7 @@ class UploadProfilePic(FlaskForm):
     ProfilePic = FileField("Change profile pitcure",validators=[FileAllowed(['jpg', 'png', 'jpeg'],'Image files only!'),data_required()])
     Submit = SubmitField("Change")
 
+
 class UploadSingle(FlaskForm):
 
     CoverArt = FileField("Add cover",validators=[FileAllowed(['jpg', 'png', 'jpeg']),data_required()])
@@ -41,13 +43,13 @@ class UpdateBio(FlaskForm):
     Bio = TextAreaField("Write a short bio",validators=[data_required(),Length(min=0,max=200)])
     Submit = SubmitField("Change")
 
-
+# password doesnt match repeat password error za sign up
 def form_pass_errors_signup(Password,Password_repeat):
     if Password != Password_repeat:
         return "Passwords do not match."
     return ""
 
-
+#email error za sign up
 def form_email_errors_signup(email):
     
     try:

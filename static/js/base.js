@@ -1,4 +1,5 @@
 
+// doda css za specificn html page ko se dinamicno zamenja
 function AppenedCss(cssFile){
     
     const link = document.createElement('link');
@@ -8,6 +9,7 @@ function AppenedCss(cssFile){
     document.head.appendChild(link);
 }
 
+// doda js za specificn html page ko se dinamicno zamenja
 function AppenedJS(jsFile){
 
     const script = document.createElement('script');
@@ -16,7 +18,7 @@ function AppenedJS(jsFile){
     script.setAttribute('dinamic',true);
     document.head.appendChild(script);
 }
-
+// otstrani js in css prejsne strani
 function RemoveJsCss(){
 
     const oldCSS = document.querySelector('link[dinamic]');
@@ -25,7 +27,7 @@ function RemoveJsCss(){
     if(oldJS) oldJS.remove();
 }
 
-
+// dinamicno zamenja html layout-main-content elementa in poklice RemoveJsCss , AppenedJS,AppenedCss
 function Changehtml(file,cssFile,jsFile){
 
 
@@ -59,13 +61,13 @@ function Changehtml(file,cssFile,jsFile){
 
 
 
-
+// on load prikaze html od home pagea needs work
 $( document ).ready(function() {
     Changehtml("home","/static/css/home.css")
 });
 
 
-
+//on click predvaja komad in prikaze Title,cover,artist v levem spodnjem kotu
 function play(element){
     var audio = element.getAttribute('audio');
     var artist =element.getAttribute('Artist');
@@ -83,7 +85,7 @@ function play(element){
 
 }
 
-
+//da musko na pauzo ali jo predvaja
 function StopPlay(){
     var audio_player = document.getElementById('song-audio');
     if(audio_player.paused){
@@ -101,7 +103,7 @@ function StopPlay(){
 
 
 
-
+//doloca volume muske
 volume.addEventListener('input',function(){
     var volume = document.getElementById('volume')
     var audio = document.getElementById('song-audio')

@@ -1,8 +1,6 @@
+//prikaze vse "singles" komade
 $(document).ready(function () {
     
-
-
-
     $.ajax({
         url: "/singles-display",
         dataType: "json",
@@ -32,7 +30,7 @@ $(document).ready(function () {
 
     
 });
-
+//prikaze bio
 function load_bio(){
 
     $.ajax({
@@ -48,7 +46,7 @@ function load_bio(){
 }
 
 
-
+// prikaze profile pitcure
 function load_profile_pic(){
 
     $.ajax({

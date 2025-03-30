@@ -262,7 +262,7 @@ def get_song_data(Username):
     cnx=connect()
     cursor=cnx.cursor()
 
-    query = "SELECT Title,Audio,Cover_art,YEAR(Release_year) FROM songs s JOIN uporabniki u on s.Artist_ID = u.ID WHERE u.ID = %s"
+    query = "SELECT Title,Audio,Cover_art,YEAR(Release_year),u.Username FROM songs s JOIN uporabniki u on s.Artist_ID = u.ID WHERE u.ID = %s"
         
     
 

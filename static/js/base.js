@@ -68,11 +68,19 @@ $( document ).ready(function() {
 
 function play(element){
     var audio = element.getAttribute('audio');
-    
+    var artist =element.getAttribute('Artist');
+    var Title = element.getAttribute('Title');
+    var Img = element.getAttribute('Img');
+
     var audio_player = document.getElementById('song-audio');
     audio_player.src = audio;
     audio_player.play();
-    console.log("worked")
+
+    document.getElementById('nowPlaying-artist').innerText = artist;
+    document.getElementById('nowPlaying-title').innerText = Title;
+    document.getElementById('nowPlaying-img').src = Img;
+
+
 }
 
 
@@ -92,11 +100,11 @@ function StopPlay(){
 }
 
 
-var volume = document.getElementById('volume')
-var audio = document.getElementById('song-audio')
+
 
 volume.addEventListener('input',function(){
-
+    var volume = document.getElementById('volume')
+    var audio = document.getElementById('song-audio')
     audio.volume = volume.value;
 
 })

@@ -90,3 +90,13 @@ function StopPlay(){
 
 
 }
+
+
+var volume = document.getElementById('volume')
+var audio = document.getElementById('song-audio')
+
+volume.addEventListener('input',function(){
+
+    audio.volume = volume.value;
+
+})

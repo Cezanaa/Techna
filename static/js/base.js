@@ -28,23 +28,32 @@ function RemoveJsCss(){
 
 function Changehtml(file,cssFile,jsFile){
 
+
+    const content = document.getElementById('layout-main-content');
+    const display = content.style.display
+    content.style.display = 'none'; 
     
     RemoveJsCss();
-    AppenedCss(cssFile);
-    AppenedJS(jsFile);
-    const contant = document.getElementById('layout-main-content');
-
-
-    fetch(file)
-        .then(response => response.text())
-
-        .then(data =>{
-            contant.innerHTML =data;
+    Promise.all([AppenedJS(jsFile),AppenedCss(cssFile) ])
+        .then(()=>{   
             
             
+            const contant = document.getElementById('layout-main-content');
+
+
+            fetch(file)
+                .then(response => response.text())
+        
+                .then(data =>{
+                    contant.innerHTML =data;
+                    content.style.display = display;
+        
+                })
+
 
 
         })
+
 
 }
 

@@ -1,17 +1,34 @@
 $(document).ready(function () {
     
+
+
+
     $.ajax({
-        url: "/display-profile-pic",
+        url: "/singles-display",
+        dataType: "json",
         success: function (result) {
-            if (result == "static/default_profile_pic.png") {
-                document.getElementById("profile-pic").src = result;
-            } else {
-                var base64Image = "data:image/jpeg;base64," + result;
-                document.getElementById("profile-pic").src = base64Image;
+            for (let i = 1; i < result[1] + 1; i++) {
+                
+
+                var base64Img = "data:image/jpeg;base64," + result[0][i - 1][2];
+                document.getElementById(`single-${i}-img`).src = base64Img;
+                document.getElementById(`single-${i}-title`).innerText = result[0][i - 1][0];
+                document.getElementById(`single-${i}-date`).innerText = result[0][i - 1][3];
+
+                
             }
+            load_profile_pic();
+            load_bio();
         }
     });
 
+
+
+
+    
+});
+
+function load_bio(){
 
     $.ajax({
         url: "/display-bio",
@@ -23,22 +40,31 @@ $(document).ready(function () {
             }
         }
     });
+}
 
+
+
+function load_profile_pic(){
 
     $.ajax({
-        url: "/singles-display",
-        dataType: "json",
+        url: "/display-profile-pic",
         success: function (result) {
-            for (let i = 1; i < result[1] + 1; i++) {
-                console.log(result[0][i - 1][1]);
+            
+            if(result == "/static/images/default_profile_pic.png"){
+                
+                document.getElementById("profile-pic").src = result
 
-                var base64Img = "data:image/jpeg;base64," + result[0][i - 1][2];
-                document.getElementById(`single-${i}-img`).src = base64Img;
-                document.getElementById(`single-${i}-title`).innerText = result[0][i - 1][0];
-                document.getElementById(`single-${i}-date`).innerText = result[0][i - 1][3];
+            }
+            else {
+                
+                var base64Image = "data:image/jpeg;base64," + result;
+                document.getElementById("profile-pic").src = base64Image;
+                
+                
             }
         }
-    });
-});
+    })
 
 
+
+}

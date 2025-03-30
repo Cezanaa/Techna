@@ -28,6 +28,7 @@
             <div class="form-group">
                 <label for="confirm_password">{{ form.Confirm_password.label }}</label>
                 {{ form.Confirm_password(id="confirm_password", class="form-control") }}
+                <span class="error">{{ RepeatPassword_error }}</span>
             </div>
 
             <div class="form-group">
@@ -48,6 +49,7 @@
             <div class="form-group">
                 <label for="gmail">{{ form.Gmail.label }}</label>
                 {{ form.Gmail(id="gmail", class="form-control") }}
+                <span class="error">{{ email_error }}</span>
             </div>
 
             <div class="form-group">

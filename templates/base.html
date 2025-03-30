@@ -12,6 +12,9 @@
     
 </head>
 <body>
+    
+
+
     <div class="layout-container">
         <!-- Sidebar -->
         <div class="layout-sidebar">
@@ -20,10 +23,11 @@
                 <h1>Techna</h1>
             </div>
             <ul class="sidebar-nav-links">
-
+                
                 {% set homeCss = url_for('static', filename="css/home.css") %}
                 {% set profileCss = url_for('static', filename="css/profile.css") %}
                 {% set profileJs = url_for('static', filename="js/profile.js") %}
+
                 <li onclick="Changehtml('home','{{homeCss}}')">Home</li>
                 
                 <li onclick="Changehtml('profile','{{profileCss}}','{{profileJs}}')">Profile</li>

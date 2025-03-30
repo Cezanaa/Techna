@@ -4,7 +4,7 @@
 from flask import Flask, render_template, redirect, request, url_for,jsonify
 from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt,get_bio,update_bio,upload_song,get_song_data
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle
+from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
 from encoding import encode_64,salt_password,encode_img_audio_json
 
 
@@ -93,21 +93,30 @@ def sign_up():
 
     if request.method == "POST":
         Username = form.Username.data
-        if find_user(Username) == "ni":
-            Password = form.Password.data
-            Name = form.First_name.data
-            Age = form.Age.data
-            Gender = form.Gender.data
-            Gmail = form.Gmail.data
+        Password = form.Password.data
+        RepeatPassword = form.Confirm_password.data
+        Name = form.First_name.data
+        Age = form.Age.data
+        Gender = form.Gender.data
+        Gmail = form.Gmail.data
 
-            add_account(Username, Password, Name, Age, Gender, Gmail)
-            return redirect(url_for("login"))
+        if form.validate_on_submit():
+            
+
+            if find_user(Username) == "ni":
+                
+
+                add_account(Username, Password, Name, Age, Gender, Gmail)
+                return redirect(url_for("login"))
+            else:
+                username_error = "This username is already taken"
+                return render_template("sign_up.html", username_error=username_error, form=form)
         else:
-            username_error = "This username is already taken"
-            return render_template("sign_up.html", username_error=username_error, form=form)
-    else:
-        return render_template("sign_up.html", form=form)
-
+            repat_password_error = form_pass_errors_signup(Password,RepeatPassword)
+            email_error = form_email_errors_signup(Gmail)
+            return render_template("sign_up.html", form=form,RepeatPassword_error=repat_password_error,email_error=email_error)
+        
+    return render_template("sign_up.html",form=form)
 
 
 @app.route("/singles-display")
@@ -127,22 +136,23 @@ def edit_profile():
     uploas_single_form = UploadSingle()
 
     if request.method == "POST":
-        print("boobs")
+          
 
-        profile_pic = update_profile_pic_form.ProfilePic.data
-        bio = update_bio_form.Bio.data
-        song_title = uploas_single_form.Title.data
-        song_file = uploas_single_form.Audio.data
-        song_cover_art=uploas_single_form.CoverArt.data
-
-        if profile_pic:
-        
+        if update_profile_pic_form.validate_on_submit():
+            profile_pic = update_profile_pic_form.ProfilePic.data
             profile_pic_data = profile_pic.read()
             upload_profile_pic(current_user.id,profile_pic_data)
-        if bio:
+
+        if update_bio_form.validate_on_submit():
+            bio = update_bio_form.Bio.data
+            
             update_bio(current_user.id,bio)
 
-        if song_title:
+        if uploas_single_form.validate_on_submit():
+            song_title = uploas_single_form.Title.data
+            song_file = uploas_single_form.Audio.data
+            song_cover_art=uploas_single_form.CoverArt.data
+
             song_file = song_file.read()
             song_cover_art = song_cover_art.read()
             upload_song(current_user.id,song_title,song_file,song_cover_art)
@@ -160,7 +170,7 @@ def edit_profile():
 def display_profile_pic():
     
     if not get_profile_pic(current_user.id):
-        return "static/images/default_profile_pic.png"
+        return "/static/images/default_profile_pic.png"
 
     return encode_64(get_profile_pic(current_user.id))
 

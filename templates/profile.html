@@ -11,7 +11,7 @@
             <p class="followers-count">Followers: <span id="followers-count">{{ current_user.followers }}</span></p>
             {% set editProfileCss = url_for('static', filename="css/edit_profile.css") %}
             {% set editProfileJs = url_for('static', filename="js/edit_profile.js") %}
-            <a onclick="Changehtml('edit-profile','{{editProfileCss}}','{editProfileJs}')" class="edit-profile-link">Edit Profile</a>
+            <a onclick="Changehtml('edit-profile','{{editProfileCss}}','{{editProfileJs}}')" class="edit-profile-link">Edit Profile</a>
             
         </div>
     </div>

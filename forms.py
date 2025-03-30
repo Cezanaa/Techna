@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,IntegerField,SelectField,SubmitField,FileField,TextAreaField
-from wtforms.validators import data_required,Length,Email,equal_to
+from wtforms.validators import data_required,Length,Email,EqualTo
 from flask_wtf.file import FileAllowed
-
+from email_validator import validate_email,EmailNotValidError
 
 class RegistrationForm(FlaskForm):
     Username = StringField('Username',validators=[data_required(),Length(min=4,max=15)])
     Password = PasswordField('Password',validators=[data_required(),Length(min=5)])
-    Confirm_password = PasswordField('Confirm Password',validators=[data_required(),equal_to(Password)])
+    Confirm_password = PasswordField('Confirm Password',validators=[data_required(),EqualTo('Password')])
     First_name = StringField('first name',validators=[data_required()])
     Age = IntegerField('age' ,validators=[data_required()])
     Gender = SelectField('gender',choices=[("M", "Male"), ("F", "Female")],validators=[data_required()])
@@ -40,3 +40,21 @@ class UploadSingle(FlaskForm):
 class UpdateBio(FlaskForm):
     Bio = TextAreaField("Write a short bio",validators=[data_required(),Length(min=0,max=200)])
     Submit = SubmitField("Change")
+
+
+def form_pass_errors_signup(Password,Password_repeat):
+    if Password != Password_repeat:
+        return "Passwords do not match."
+    return ""
+
+
+def form_email_errors_signup(email):
+    
+    try:
+        validate_email(email)
+        return ""
+        
+    except EmailNotValidError:
+        return "Invalid email"
+
+

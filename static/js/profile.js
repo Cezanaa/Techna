@@ -14,6 +14,8 @@ $(document).ready(function () {
                 document.getElementById(`single-${i}-img`).src = base64Img;
                 document.getElementById(`single-${i}-title`).innerText = result[0][i - 1][0];
                 document.getElementById(`single-${i}-date`).innerText = result[0][i - 1][3];
+                document.getElementById(`single-${i}`).setAttribute('audio',`data:audio/mp3;base64,` +result[0][i - 1][1]);
+                
 
                 
             }

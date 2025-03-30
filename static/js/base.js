@@ -63,3 +63,21 @@ function Changehtml(file,cssFile,jsFile){
 $( document ).ready(function() {
     Changehtml("home","/static/css/home.css")
 });
+
+
+
+function play(element){
+    var audio = element.getAttribute('audio');
+    
+    var audio_player = document.getElementById('song-audio');
+    audio_player.src = audio;
+    audio_player.play();
+    console.log("worked")
+}
+
+
+function StopPlay(){
+
+
+
+}

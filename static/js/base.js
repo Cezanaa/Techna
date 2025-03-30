@@ -77,6 +77,15 @@ function play(element){
 
 
 function StopPlay(){
+    var audio_player = document.getElementById('song-audio');
+    if(audio_player.paused){
+        audio_player.play()
+    }
+    else{
+        audio_player.pause()
+
+
+    }
 
 
 

@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `songs` (
   `Audio` VARCHAR(100) NOT NULL, 
   `Cover_art` VARCHAR(100) NOT NULL,
   `Release_year` DATETIME DEFAULT NOW(),
+  `Streams` INT DEFAULT 0,
   `Is_single` TINYINT(1) NOT NULL,
   `Artist_ID` INT NOT NULL, 
   PRIMARY KEY (`ID`),

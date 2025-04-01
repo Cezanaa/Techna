@@ -17,16 +17,4 @@ def salt_password(password,salt):
     return bcrypt.hashpw(bytes_password, salt)
 
 
-#encodea img in audio v base 64 dobi ga iz get_song_data() funkcije
-def encode_img_audio_json(json):
 
- 
-    for i,row in enumerate(json):
-        row = list(row)
-        
-        for e,item in enumerate(row):
-            if e == 1 or e == 2:
-                row[e] = encode_64(item)
-        json[i] = row
-
-    return json

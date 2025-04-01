@@ -5,18 +5,19 @@ $(document).ready(function () {
         url: "/singles-display",
         dataType: "json",
         success: function (result) {
+            console.log(result[1]);
             for (let i = 1; i < result[1] + 1; i++) {
                 
 
-                var base64Img = "data:image/jpeg;base64," + result[0][i - 1][2];
-                document.getElementById(`single-${i}-img`).src = base64Img;
+                console.log(result[0][i - 1][2]);
+                document.getElementById(`single-${i}-img`).src = result[0][i - 1][2];
                 document.getElementById(`single-${i}-title`).innerText = result[0][i - 1][0];
                 document.getElementById(`single-${i}-date`).innerText = result[0][i - 1][3];
 
-                document.getElementById(`single-${i}`).setAttribute('audio',`data:audio/mp3;base64,` +result[0][i - 1][1]);
+                document.getElementById(`single-${i}`).setAttribute('audio',result[0][i - 1][1]);
                 document.getElementById(`single-${i}`).setAttribute('Artist',result[0][i - 1][4]);
                 document.getElementById(`single-${i}`).setAttribute('Title',result[0][i - 1][0]);
-                document.getElementById(`single-${i}`).setAttribute('Img',base64Img);                
+                document.getElementById(`single-${i}`).setAttribute('Img',result[0][i - 1][2]);                
 
                 
             }
@@ -53,6 +54,7 @@ function load_profile_pic(){
         url: "/display-profile-pic",
         success: function (result) {
             
+            
             if(result == "/static/images/default_profile_pic.png"){
                 
                 document.getElementById("profile-pic").src = result
@@ -60,8 +62,8 @@ function load_profile_pic(){
             }
             else {
                 
-                var base64Image = "data:image/jpeg;base64," + result;
-                document.getElementById("profile-pic").src = base64Image;
+                
+                document.getElementById("profile-pic").src = result;
                 
                 
             }

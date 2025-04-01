@@ -2,11 +2,11 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for,jsonify
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic,get_profile_pic,get_salt,get_bio,update_bio,upload_song,get_song_data
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
-from encoding import encode_64,salt_password,encode_img_audio_json
-
+from encoding import encode_64,salt_password
+from b2 import upload_profile_pic,upload_song
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "aaaaaaaaaaaaaaaaaaaaa"
@@ -122,7 +122,7 @@ def sign_up():
 @app.route("/singles-display")
 @login_required
 def singles_display():
-    json=encode_img_audio_json(get_song_data(current_user.id)[0])
+    json=get_song_data(current_user.id)[0]
     singles_cnt=get_song_data(current_user.id)[1]
     
     return jsonify(json,singles_cnt)
@@ -140,8 +140,9 @@ def edit_profile():
 
         if update_profile_pic_form.validate_on_submit():
             profile_pic = update_profile_pic_form.ProfilePic.data
-            profile_pic_data = profile_pic.read()
-            upload_profile_pic(current_user.id,profile_pic_data)
+            upload_profile_pic(current_user.id,profile_pic,upload_profile_pic_url)
+                         
+            
 
         if update_bio_form.validate_on_submit():
             bio = update_bio_form.Bio.data
@@ -155,7 +156,8 @@ def edit_profile():
 
             song_file = song_file.read()
             song_cover_art = song_cover_art.read()
-            upload_song(current_user.id,song_title,song_file,song_cover_art)
+            upload_song(current_user.id,song_cover_art,song_file,upload_song_url,song_title)
+            
 
             
         
@@ -169,10 +171,11 @@ def edit_profile():
 @login_required
 def display_profile_pic():
     
-    if not get_profile_pic(current_user.id):
+    url = get_profile_pic_url(current_user.id)
+    if not url:
         return "/static/images/default_profile_pic.png"
 
-    return encode_64(get_profile_pic(current_user.id))
+    return url
 
 
 @app.route("/display-bio", methods=["POST", "GET"])

@@ -119,7 +119,7 @@ def get_followers(Username):
         return "ni"
 
 
-def upload_profile_pic(Username,file_data):
+def upload_profile_pic_url(Username,url):
     cnx=connect()
     cursor=cnx.cursor()
     
@@ -128,7 +128,7 @@ def upload_profile_pic(Username,file_data):
             
     
 
-    cursor.execute(query, (file_data,Username))
+    cursor.execute(query, (url,Username))
     cnx.commit()
     
         
@@ -151,7 +151,7 @@ def update_bio(Username,bio):
     cursor.close()
     cnx.close()
 
-def get_profile_pic(Username):
+def get_profile_pic_url(Username):
 
     
 
@@ -215,7 +215,7 @@ def get_salt(Username):
     cnx.close()
     return salt[0]
   
-def upload_song(Username,title,song_file,coverArt_file):
+def upload_song_url(Username,title,song_url,coverArt_url):
     cnx=connect()
     cursor=cnx.cursor()
     
@@ -224,7 +224,7 @@ def upload_song(Username,title,song_file,coverArt_file):
             
     
 
-    cursor.execute(query, (title,song_file,coverArt_file,1,get_user_id(Username)))
+    cursor.execute(query, (title,song_url,coverArt_url,1,get_user_id(Username)))
     cnx.commit()
     
         

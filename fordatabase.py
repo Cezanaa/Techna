@@ -276,3 +276,60 @@ def get_song_data(Username):
     return data,len(data)
 
 
+def get_song_album_data(search):
+    cnx = connect()
+    cursor = cnx.cursor()
+
+    query = """
+        SELECT LOWER(s.Title), s.Audio, s.Cover_art, YEAR(s.Release_year), 
+               u.Username, s.Streams, u.Followers
+        FROM songs s
+        JOIN uporabniki u ON s.Artist_ID = u.ID
+        WHERE LOWER(s.Title) LIKE %s
+        ORDER BY s.Streams DESC
+        LIMIT 6
+    """
+
+    search_term = search.lower() + "%"  
+
+    
+
+    cursor.execute(query, (search_term,))  
+    data = cursor.fetchall()
+
+    cursor.close()
+    cnx.close()
+
+    return data, len(data)
+
+
+
+
+def get_artist_data(search):
+    cnx = connect()
+    cursor = cnx.cursor()
+
+    query = """
+    SELECT LOWER(u.Username), Followers, profile_pic
+    FROM uporabniki u
+    WHERE u.Username LIKE %s
+    ORDER BY Followers DESC
+    LIMIT 3
+    """
+
+    search_term = search + "%"  
+
+
+    cursor.execute(query, (search_term,)) 
+    data = cursor.fetchall()
+
+    cursor.close()
+    cnx.close()
+
+    return data, len(data)
+
+
+
+
+
+

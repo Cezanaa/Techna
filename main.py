@@ -2,7 +2,7 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for,jsonify
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
 from encoding import encode_64,salt_password
@@ -187,7 +187,47 @@ def display_bio():
     
 
     return get_bio(current_user.id)
+@app.route("/search",methods=["POST","GET"])
+@login_required
+def search():
 
+
+    print(request.method)
+    if request.method == 'POST':
+
+        data = request.data.decode("utf-8")
+        artist_len=get_artist_data(data)[1] 
+        singles_len=get_song_album_data(data)[1]
+        print("data")
+
+        return render_template("search.html",singles_len=singles_len,artists_len=artist_len)
+
+    return render_template("search.html",singles_len=0,artists_len=0)
+
+"""
+@app.route("/singles-display")
+@login_required
+def singles_display():
+    json=get_song_data(current_user.id)[0]
+    singles_cnt=get_song_data(current_user.id)[1]
+    
+    return jsonify(json,singles_cnt)
+"""
+@app.route("/songs-display-search")
+@login_required
+def song_album_display():
+    data = request.data.decode("utf-8")
+    json=get_song_album_data(data)[0]
+    cnt=get_song_album_data(data)[1]
+    return jsonify(json,cnt)
+
+@app.route("/artist-display-search")
+@login_required
+def artist_display():
+    data = request.data.decode("utf-8")
+    json=get_artist_data(data)[0]
+    cnt=get_artist_data(data)[1]    
+    return jsonify(json,cnt)
 
 # Run the app
 if __name__ == "__main__":

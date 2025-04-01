@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `uporabniki` (
   `Password` LONGBLOB NOT NULL,
   `Salt` LONGBLOB NOT NULL,
   `user_data_ID` INT NOT NULL,
-  `profile_pic` LONGBLOB DEFAULT NULL,
+  `profile_pic` VARCHAR(100) DEFAULT null ,
   `followers` INT DEFAULT 0,
   
   PRIMARY KEY (`ID`),
@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS `uporabniki` (
 CREATE TABLE IF NOT EXISTS `songs` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `Title` VARCHAR(30) NOT NULL,
-  `Audio` LONGBLOB NOT NULL, 
-  `Cover_art` LONGBLOB NOT NULL,
+  `Audio` VARCHAR(100) NOT NULL, 
+  `Cover_art` VARCHAR(100) NOT NULL,
   `Release_year` DATETIME DEFAULT NOW(),
   `Is_single` TINYINT(1) NOT NULL,
   `Artist_ID` INT NOT NULL, 

@@ -5,11 +5,11 @@ $(document).ready(function () {
         url: "/singles-display",
         dataType: "json",
         success: function (result) {
-            console.log(result[1]);
+            
             for (let i = 1; i < result[1] + 1; i++) {
                 
 
-                console.log(result[0][i - 1][2]);
+                
                 document.getElementById(`single-${i}-img`).src = result[0][i - 1][2];
                 document.getElementById(`single-${i}-title`).innerText = result[0][i - 1][0];
                 document.getElementById(`single-${i}-date`).innerText = result[0][i - 1][3];

@@ -27,13 +27,15 @@
                 {% set homeCss = url_for('static', filename="css/home.css") %}
                 {% set profileCss = url_for('static', filename="css/profile.css") %}
                 {% set profileJs = url_for('static', filename="js/profile.js") %}
+                {% set searchCss = url_for('static', filename="css/search.css") %}
+                {% set searchJs = url_for('static', filename="js/search.js") %}
 
                 <li onclick="Changehtml('home','{{homeCss}}')">Home</li>
                 
                 <li onclick="Changehtml('profile','{{profileCss}}','{{profileJs}}')">Profile</li>
                 
                 
-                <li><a href="#">Search</a></li>
+                <li onclick="Changehtml('search','{{searchCss}}','{{searchJs}}')">Search</li>
                 <li><a href="#">Your Library</a></li>
             </ul>
             <div class="sidebar-playlists">
@@ -55,10 +57,10 @@
     <!-- Footer -->
     <div class="layout-footer">
         <div class="footer-now-playing">
-            <img id="nowPlaying-img"src="" alt="Album Art">
+            <img id="nowPlaying-img"src="" >
             <div class="footer-song-info">
-                <h4 id="nowPlaying-title">Song Title</h4>
-                <p id="nowPlaying-artist">Artist Name</p>
+                <h4 id="nowPlaying-title"></h4>
+                <p id="nowPlaying-artist"></p>
             </div>
         </div>
         <div class="footer-controls">
@@ -73,11 +75,7 @@
         </div>
     </div>
 
-    <!--<script src="{{ url_for('static', filename='js/profile.js') }}"></script> -->
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">  -->
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">   -->
-    <!--<script src="{{ url_for('static', filename='js/edit_profile.js') }}"></script>-->
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}"> -->
+
     
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
     <script src="./js/base.js"></script>

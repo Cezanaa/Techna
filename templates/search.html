@@ -1,0 +1,39 @@
+
+
+<input type="text" placeholder="Search for songs, artists, or albums..." class="search-bar" id="search" >
+
+
+<div class="rez">
+
+    <div class="single-list">
+
+
+        {% for song in range(singles_len) %}
+        
+        <div id="single-{{ loop.index }}" class="single" onclick="play(this)">
+            <img id="single-{{ loop.index }}-img" class="single-cover" src="single-cover.jpg" alt="Single Cover" />
+            <h3 id="single-{{ loop.index }}-title" class="single-title">Title</h3>
+            <p id="single-{{ loop.index }}-date" class="single-date">Release Year</p>
+        </div>
+         
+        {% endfor %}
+    </div>
+
+    <div class="artist-list">
+        {% for artist in range(artists_len) %}
+        
+        <div id="artist-{{ loop.index }}" class="artist" onclick="viewArtist(this)">
+            <img id="artist-{{ loop.index }}-img" class="artist-photo" src="artist-photo.jpg" alt="Artist Photo" />
+            <h3 id="artist-{{ loop.index }}-name" class="artist-name">Artist Name</h3>
+            <p id="artist-{{ loop.index }}-followers" class="artist-genre">Followers</p>
+        </div>
+        
+        {% endfor %}
+    </div>   
+
+
+
+
+
+
+</div>

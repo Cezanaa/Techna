@@ -194,30 +194,30 @@ def search():
 
     return render_template("search.html")
 
-"""
-@app.route("/singles-display")
-@login_required
-def singles_display():
-    json=get_song_data(current_user.id)[0]
-    singles_cnt=get_song_data(current_user.id)[1]
-    
-    return jsonify(json,singles_cnt)
-"""
+
+
 @app.route("/songs-display-search")
 @login_required
 def song_album_display():
-    data = request.data.decode("utf-8")
+    data = request.args.get("search", "").strip().lower()
     json=get_song_album_data(data)[0]
     cnt=get_song_album_data(data)[1]
+    
     return jsonify(json,cnt)
 
 @app.route("/artist-display-search")
 @login_required
 def artist_display():
-    data = request.data.decode("utf-8")
+    data = request.args.get("search", "").strip().lower()
     json=get_artist_data(data)[0]
     cnt=get_artist_data(data)[1]    
     return jsonify(json,cnt)
+
+
+@app.route("/discover")
+@login_required
+def discover():
+    return render_template("home_discover.html")
 
 # Run the app
 if __name__ == "__main__":

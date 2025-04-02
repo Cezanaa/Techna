@@ -110,4 +110,3 @@ volume.addEventListener('input',function(){
     audio.volume = volume.value;
 
 })
-

@@ -1,17 +1,17 @@
 {% set searchCss = url_for('static', filename="css/search.css") %}
 {% set searchJs = url_for('static', filename="js/search.js") %}
-{% set homeDIscoverCss = url_for('static', filename="css/home_discover.css") %}
+{% set homeCss = url_for('static', filename="css/home.css") %}
 <div class="home-page">
     <input type="text" placeholder="Search for songs, artists, or albums..." class="search-bar" onclick="Changehtml('search','{{searchCss}}','{{searchJs}}')">
 
     <div class="main-content">
         <div id="switch" class="switch">
-            <p id="foryou" class="foryou">for you</p>
-            <p id="explore" class="explore" onclick="Changehtml('discover','{{homeDIscoverCss}}')">explore</p>
+            <p id="foryou" class="foryou" onclick="Changehtml('home','{{homeCss}}')">for you</p>
+            <p id="explore" class="explore" >explore</p>
         </div>
         <div class="content">
-            <div>for you</div>
             
+            <p>exolore</p>
         </div>
     </div>
 </div>

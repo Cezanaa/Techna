@@ -1,26 +1,133 @@
-/* Style for the search bar */
+/* General styles for the search bar */
 .search-bar {
-    width: 90%; /* Longer search bar */
-    max-width: 800px; /* Maximum width for larger screens */
-    padding: 12px 15px; /* Padding inside the search bar */
-    font-size: 1rem; /* Font size for the text */
-    border: none; /* Remove border */
-    border-radius: 25px; /* Rounded edges */
+    width: 90%;
+    max-width: 800px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
     outline: none;
-    background-color: #282828; /* Dark gray background */
-    color: #ffffff; /* White text */
+    background-color: #282828;
+    color: #ffffff;
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
-    margin: 20px auto; /* Adds vertical spacing and centers the search bar horizontally */
-    display: block; /* Ensures it behaves like a block element */
+    margin: 20px auto;
+    display: block;
 }
 
-/* Placeholder text style */
-.search-bar::placeholder {
-    color: #b3b3b3; /* Light gray placeholder text */
-}
-
-/* Focus state for the search bar */
 .search-bar:focus {
-    background-color: #333; /* Slightly lighter gray on focus */
-    box-shadow: none; /* Removes any glow effect */
+    border-color: #007bff;
+    background-color: #282828;
+}
+
+/* Container for the results */
+.rez {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the display container */
+.display-search {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    max-width: 400px;
+    margin: 0;
+}
+
+/* Style for each list item (songs and artists) */
+#display li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: flex-start; /* Align everything to the left */
+    transition: background-color 0.3s ease;
+}
+
+#display li:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Shared container for songs and artists */
+#display .song-div,
+#display .artist-div {
+    display: flex;
+    align-items: flex-start; /* Align everything to the left */
+    width: 100%;
+    height: auto;
+    background-color: transparent;
+}
+
+/* Image container for songs and artists */
+#display .img-container {
+    flex-shrink: 0;
+    margin-right: 20px; /* Add spacing between the image and the text */
+    margin-bottom: 10px; /* Add spacing below the image */
+    display: flex;
+    align-items: center;
+    height: auto;
+}
+
+/* Shared image styles */
+#display .img {
+    width: 90px;
+    height: 90px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+#display .img-artist {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+}
+
+/* Content container for text (songs and artists) */
+#display .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align text to the top */
+    flex-grow: 1;
+    height: auto;
+    margin-left: 20px; /* Add spacing between the image and the text */
+}
+
+/* Text styles for titles, artists, and followers */
+#display .title,
+#display .artist {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#display .followers,
+#display .streams {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #aaaaaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #display li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #display .img-container {
+        margin-bottom: 10px;
+    }
+
+    #display .content-container {
+        margin-left: 0;
+    }
 }

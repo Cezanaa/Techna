@@ -187,22 +187,12 @@ def display_bio():
     
 
     return get_bio(current_user.id)
-@app.route("/search",methods=["POST","GET"])
+@app.route("/search")
 @login_required
 def search():
 
 
-    print(request.method)
-    if request.method == 'POST':
-
-        data = request.data.decode("utf-8")
-        artist_len=get_artist_data(data)[1] 
-        singles_len=get_song_album_data(data)[1]
-        print("data")
-
-        return render_template("search.html",singles_len=singles_len,artists_len=artist_len)
-
-    return render_template("search.html",singles_len=0,artists_len=0)
+    return render_template("search.html")
 
 """
 @app.route("/singles-display")

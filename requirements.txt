@@ -4,3 +4,4 @@ flask_wtf
 mysql-connector-python
 bcrypt
 email-validator
+b2sdk

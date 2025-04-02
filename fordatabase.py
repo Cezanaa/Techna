@@ -282,7 +282,7 @@ def get_song_album_data(search):
 
     query = """
         SELECT LOWER(s.Title), s.Audio, s.Cover_art, YEAR(s.Release_year), 
-               u.Username, s.Streams, u.Followers
+               u.Username, s.Streams
         FROM songs s
         JOIN uporabniki u ON s.Artist_ID = u.ID
         WHERE LOWER(s.Title) LIKE %s

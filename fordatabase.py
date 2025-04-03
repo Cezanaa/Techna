@@ -281,16 +281,16 @@ def get_song_album_data(search):
     cursor = cnx.cursor()
 
     query = """
-        SELECT LOWER(s.Title), s.Audio, s.Cover_art, YEAR(s.Release_year), 
+        SELECT s.Title, s.Audio, s.Cover_art, YEAR(s.Release_year), 
                u.Username, s.Streams
         FROM songs s
         JOIN uporabniki u ON s.Artist_ID = u.ID
-        WHERE LOWER(s.Title) LIKE %s
+        WHERE replace(LOWER(s.Title)," ","") LIKE %s
         ORDER BY s.Streams DESC
         LIMIT 6
     """
 
-    search_term = search.lower() + "%"  
+    search_term =  "%" + search.lower().replace(" ","") + "%"  
 
     
 
@@ -310,14 +310,14 @@ def get_artist_data(search):
     cursor = cnx.cursor()
 
     query = """
-    SELECT LOWER(u.Username), Followers, profile_pic
+    SELECT u.Username, Followers, profile_pic
     FROM uporabniki u
-    WHERE u.Username LIKE %s
+    WHERE REPLACE(LOWER(u.Username)," ","") LIKE %s
     ORDER BY Followers DESC
     LIMIT 3
     """
 
-    search_term = search + "%"  
+    search_term =  "%" + search.lower().replace(" ","") + "%"  
 
 
     cursor.execute(query, (search_term,)) 

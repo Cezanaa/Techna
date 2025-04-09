@@ -39,3 +39,52 @@ poudariti varnostne funkcije aplikacije (moderiranje vsebin, zaščita avtorskih
 
 W-T strategija:
 graditi močno in zvesta skupnost uporabnikov ki bodo ostali zvesti tudi ob večji konkurenci
+
+
+MVP:
+# Techna: Poslovni Načrt
+
+## Viri Prihodkov
+
+1. **Osnovna aplikacija je brezplačna**
+   - Dostop do osnovnih funkcionalnosti, kot so poslušanje glasbe, ustvarjanje seznamov predvajanja in iskanje glasbe.
+
+2. **Premium članstvo (5€/mesec)**
+   - Brez oglasov
+   - Višja kakovost zvoka
+   - Možnost ustvarjanja več seznamov predvajanja
+
+3. **Oglaševanje (audio oglasi)**
+   - Brezplačni uporabniki se soočajo z oglasi, ki se predvajajo med poslušanjem glasbe.
+
+4. **Provizija od umetnikov za promocijo**
+   - Umetniki lahko plačajo za promocijo svojih pesmi ali albumov na platformi.
+
+## Struktura Stroškov
+
+1. **Začetni razvoj**  
+   - 1.000€ (optimizacija aplikacije)
+
+2. **Mesečno vzdrževanje**  
+   - 1.000€ (strežniki, tehnična podpora, posodobitve in varnostne kopije)
+
+3. **Marketing-special**  
+   - 3.000€ (plačati uspešnemu umetniku, da promovira svojo glasbo na platformi)
+
+4. **Marketing**  
+   - 500€ mesečno (spletno oglaševanje, promocijski dogodki, sodelovanje z influencerji, plačani oglasi na platformah kot Instagram, Facebook, TikTok)
+
+## Strategija Pridobivanja Uporabnikov
+
+1. **Sodelovanje z DJ-ji in producenti**
+   - Ponuditi brezplačno promocijo in dostop do platforme za uveljavljene DJ-je in umetnike, da širijo svojo glasbo med uporabniki.
+
+2. **Povezovanje z glasbenimi festivali in dogodki**
+   - Partnerstvo z glasbenimi festivali za ekskluzivno predvajanje njihovih setov in nastopov v živo.
+
+3. **Akcija “Povabi prijatelja”**
+   - Ko uporabnik povabi vsaj 5 prijateljev, oba prejmeta 1 mesec brezplačnega Premium članstva.
+
+4. **Promocije z vplivneži**
+   - Sodelovanje z vplivneži, ki promovirajo novosti na področju elektronike in techno glasbe.
+

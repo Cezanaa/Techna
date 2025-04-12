@@ -329,6 +329,57 @@ def get_artist_data(search):
     return data, len(data)
 
 
+def get_song_streams(Username,Title):
+    
+    
+
+    
+    cnx=connect()
+    cursor=cnx.cursor()
+
+    query = """
+    SELECT streams FROM songs s 
+    JOIN uporabniki u on s.Artist_ID = u.ID
+    WHERE u.Username = %s and s.Title = %s
+    
+    """
+        
+    
+
+    cursor.execute(query, (Username,Title))
+    data = cursor.fetchone()
+
+        
+    cursor.close()
+    cnx.close()
+
+    return data[0]
+
+
+
+
+
+
+def update_song_streams(Username,title):
+    cnx=connect()
+    cursor=cnx.cursor()
+    
+
+    query = """
+    UPDATE songs
+    SET Streams = %s
+    WHERE Artist_ID = (SELECT ID FROM uporabniki WHERE Username = %s)
+    AND Title = %s
+    """
+            
+    
+
+    cursor.execute(query, (get_song_streams(Username,title)+1,Username,title))
+    cnx.commit()
+    
+        
+    cursor.close()
+    cnx.close()
 
 
 

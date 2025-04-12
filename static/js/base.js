@@ -74,6 +74,8 @@ function play(element){
     var Title = element.getAttribute('Title');
     var Img = element.getAttribute('Img');
 
+    update_song_streams(Title);
+
     var audio_player = document.getElementById('song-audio');
     audio_player.src = audio;
     audio_player.play();
@@ -110,3 +112,20 @@ volume.addEventListener('input',function(){
     audio.volume = volume.value;
 
 })
+
+
+
+function update_song_streams(value){
+
+    
+
+    $.ajax({
+        url: `update-song-streams?value=${encodeURIComponent(value)}`,
+        dataType: "json",
+        
+
+
+    });
+
+
+}

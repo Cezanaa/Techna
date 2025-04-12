@@ -2,11 +2,12 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for,jsonify
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data,update_song_streams
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
-from encoding import encode_64,salt_password
+from encoding import salt_password
 from b2 import upload_profile_pic,upload_song
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "aaaaaaaaaaaaaaaaaaaaa"
@@ -219,6 +220,14 @@ def artist_display():
 def discover():
     return render_template("home_discover.html")
 
-# Run the app
+
+@app.route("/update-song-streams")
+@login_required
+def update_streams():
+    title = request.args.get("value", "")
+    update_song_streams(current_user.id,title)
+    return jsonify({"message": "Stream count updated successfully"}), 200
+
+
 if __name__ == "__main__":
     app.run(debug=True)

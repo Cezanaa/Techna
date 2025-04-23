@@ -1,4 +1,3 @@
-
 /* General Background Styling */
 body {
     font-family: Arial, sans-serif;
@@ -150,13 +149,6 @@ body, html {
 
 .footer-controls {
     display: flex;
-    justify-content: center; /* Center the controls */
-    align-items: center;
-}
-
-/* Footer Controls */
-.footer-controls {
-    display: flex;
     justify-content: center; /* Center the controls horizontally */
     align-items: center; /* Center the controls vertically */
     flex: 1; /* Allow the controls to take up available space */
@@ -242,6 +234,29 @@ body, html {
 .footer-volume input[type="range"]::-moz-range-thumb:hover {
     background: #dddddd;
     transform: scale(1.1);
+}
+
+/* Footer Like Section */
+.footer-like {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    right: 280px; /* Position it to the left of the volume control */
+    bottom: 50%; /* Center vertically within the footer */
+    transform: translateY(50%); /* Adjust for centering */
+}
+
+.footer-like img {
+    width: 30px; /* Icon size */
+    height: 30px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-like img:hover {
+    transform: scale(1.2); /* Slightly enlarge on hover */
+    opacity: 0.8; /* Slightly reduce opacity on hover */
 }
 
 /* Updated Container Sidebar */

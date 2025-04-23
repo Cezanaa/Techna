@@ -74,7 +74,7 @@ function play(element){
     var Title = element.getAttribute('Title');
     var Img = element.getAttribute('Img');
 
-    update_song_streams(Title);
+    
 
     var audio_player = document.getElementById('song-audio');
     audio_player.src = audio;
@@ -83,6 +83,12 @@ function play(element){
     document.getElementById('nowPlaying-artist').innerText = artist;
     document.getElementById('nowPlaying-title').innerText = Title;
     document.getElementById('nowPlaying-img').src = Img;
+
+    update_song_streams(Title,artist);
+    is_liked(artist,Title);
+
+    
+
 
 
 }
@@ -115,17 +121,41 @@ volume.addEventListener('input',function(){
 
 
 
-function update_song_streams(value){
+function update_song_streams(value,artist){
 
     
 
     $.ajax({
-        url: `update-song-streams?value=${encodeURIComponent(value)}`,
+        url: `update-song-streams?value=${encodeURIComponent(value)}&artist=${encodeURIComponent(artist)}`,
         dataType: "json",
         
 
 
     });
 
+
+}
+
+
+function is_liked(artist,title){
+    
+    $.ajax({
+        url: `is-liked?artist=${encodeURIComponent(artist)}&title=${encodeURIComponent(title)}`,
+        dataType: "json",
+        success: function (response) {
+            console.log(response);
+            if(response=="not liked"){
+                console.log("not liked");
+
+
+            }else{
+                console.log("liked");
+            }
+
+
+        }
+
+
+    });
 
 }

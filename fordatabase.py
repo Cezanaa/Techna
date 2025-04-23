@@ -381,6 +381,90 @@ def update_song_streams(Username,title):
     cursor.close()
     cnx.close()
 
+def get_song_ID(artist_username,Title):
+    cnx = connect()
+    cursor = cnx.cursor()
+
+
+    query = """
+    SELECT s.ID 
+    FROM songs s
+    JOIN uporabniki u ON s.Artist_ID = u.ID
+    WHERE s.Title = %s AND u.Username = %s
+    """
+
+
+    cursor.execute(query, (Title, artist_username))
+    data = cursor.fetchone()
+
+    cursor.close()
+    cnx.close()
+
+
+    return data[0]
+
+
+
+def check_if_liked(Username,artist_username,title):
+    cnx=connect()
+    cursor=cnx.cursor()
+    
+
+    query = """
+    SELECT * from likes WHERE UserID = %s AND SongID = %s
+    """
+            
+    
+
+    cursor.execute(query, (get_user_id(Username),get_song_ID(artist_username,title)))
+    data = cursor.fetchone()
+        
+    cursor.close()
+    cnx.close()
+
+    if data:
+        return data[0]
+    
+    return "not liked"
+
+
+
+def update_liked_status(Username,artist_username,title):
+
+    cnx=connect()
+    cursor=cnx.cursor()
+
+
+    if check_if_liked(Username,artist_username,title) == "not liked":
+        
+        query = """
+        INSERT INTO Likes (UserID, SongID)
+        VALUES (%s, %s)
+        """
+                
+        
+
+        cursor.execute(query, (get_user_id(Username),get_song_ID(artist_username,title)))
+
+
+
+
+
+    else:
+
+        query = """
+        DELETE FROM Likes
+        WHERE UserID = %s AND SongID = %s
+        """
+        cursor.execute(query, (get_user_id(Username), get_song_ID(artist_username, title)))
+    
+     
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+
+    return "nigger"
+
 
 
 

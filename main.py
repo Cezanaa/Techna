@@ -2,7 +2,7 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for,jsonify
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data,update_song_streams
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data,update_song_streams,check_if_liked
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
 from encoding import salt_password
@@ -224,10 +224,19 @@ def discover():
 @app.route("/update-song-streams")
 @login_required
 def update_streams():
-    title = request.args.get("value", "")
-    update_song_streams(current_user.id,title)
+    title = request.args.get("value", "").strip()
+    artist = request.args.get("artist", "").strip()
+    update_song_streams(artist,title)
     return jsonify({"message": "Stream count updated successfully"}), 200
 
+@app.route("/is-liked")
+@login_required
+def is_liked():
+    artist = request.args.get("artist", "").strip()
+    title = request.args.get("title", "").strip()
+    print(artist,title)
+    print(check_if_liked(current_user.id,artist,title))
+    return check_if_liked(current_user.id,artist,title)
 
 if __name__ == "__main__":
     app.run(debug=True)

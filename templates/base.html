@@ -56,7 +56,7 @@
     </div>
 
     <!-- Footer -->
-    <div class="layout-footer">
+    <div class="layout-footer" id="layout-footer">
         <div class="footer-now-playing">
             <img id="nowPlaying-img"src="" >
             <div class="footer-song-info">
@@ -71,20 +71,23 @@
             <audio id="song-audio" src=""></audio>
         </div>
 
-        {% set unliked = url_for('static', filename="images/icons/unliked.png") %}
 
-        <div class="footer-like">
-          <img src="{{unliked}}">
-        </div>
+
+      
 
 
         <div class="footer-volume">
             <label for="volume">Volume</label>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
         </div>
+
+
     </div>
 
+    
 
+
+    
     
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
     <script src="./js/base.js"></script>

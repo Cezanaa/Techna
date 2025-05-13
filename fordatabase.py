@@ -445,6 +445,7 @@ def update_liked_status(Username,artist_username,title):
         
 
         cursor.execute(query, (get_user_id(Username),get_song_ID(artist_username,title)))
+        is_liked = True
 
 
 
@@ -457,13 +458,14 @@ def update_liked_status(Username,artist_username,title):
         WHERE UserID = %s AND SongID = %s
         """
         cursor.execute(query, (get_user_id(Username), get_song_ID(artist_username, title)))
+        is_liked = False
     
      
     cnx.commit()
     cursor.close()
     cnx.close()
 
-    return "nigger"
+    return is_liked
 
 
 

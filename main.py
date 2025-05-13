@@ -2,7 +2,7 @@
 
 
 from flask import Flask, render_template, redirect, request, url_for,jsonify
-from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data,update_song_streams,check_if_liked
+from fordatabase import find_user, add_account, find_user_password, get_gmail,get_followers,upload_profile_pic_url,get_profile_pic_url,get_salt,get_bio,update_bio,upload_song_url,get_song_data,get_song_album_data,get_artist_data,update_song_streams,check_if_liked,update_liked_status
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from forms import RegistrationForm, loginForm,UploadProfilePic,UpdateBio,UploadSingle,form_pass_errors_signup,form_email_errors_signup
 from encoding import salt_password
@@ -234,9 +234,15 @@ def update_streams():
 def is_liked():
     artist = request.args.get("artist", "").strip()
     title = request.args.get("title", "").strip()
-    print(artist,title)
-    print(check_if_liked(current_user.id,artist,title))
-    return check_if_liked(current_user.id,artist,title)
+    return jsonify(check_if_liked(current_user.id,artist,title))
+
+@app.route("/change-like-status")
+@login_required
+def change_like_status():
+    artist = request.args.get("artist", "").strip()
+    title = request.args.get("title", "").strip()
+    return jsonify(update_liked_status(current_user.id,artist,title))
+    
 
 if __name__ == "__main__":
     app.run(debug=True)
